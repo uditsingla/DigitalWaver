@@ -1,0 +1,38 @@
+PODS:
+  - ACFloatingTextfield-Swift (1.5)
+  - Alamofire (4.5.1)
+  - AlamofireImage (3.3.0):
+    - Alamofire (~> 4.5)
+  - EPSignature (1.0.4)
+  - IQKeyboardManagerSwift (5.0.4)
+  - ReachabilitySwift (3)
+  - SDWebImage (4.2.1):
+    - SDWebImage/Core (= 4.2.1)
+  - SDWebImage/Core (4.2.1)
+  - SearchTextField (1.2.0)
+  - SVProgressHUD (2.2.2)
+
+DEPENDENCIES:
+  - ACFloatingTextfield-Swift (~> 1.5)
+  - AlamofireImage
+  - EPSignature
+  - IQKeyboardManagerSwift
+  - ReachabilitySwift (~> 3)
+  - SDWebImage (~> 4.1)
+  - SearchTextField
+  - SVProgressHUD
+
+SPEC CHECKSUMS:
+  ACFloatingTextfield-Swift: ebcfb892acbce8545576dd224df7b1b7473a4bbd
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  EPSignature: a56bf2c41abc165bf2d0efb955b1c05dcabdcfa3
+  IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  SDWebImage: 1fa4c9edf525b744f002db89f3f5a38b3cd4c541
+  SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
+  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+
+PODFILE CHECKSUM: c9af38f12b8f641c022b53e4dd9bc045e92a8364
+
+COCOAPODS: 1.2.0
