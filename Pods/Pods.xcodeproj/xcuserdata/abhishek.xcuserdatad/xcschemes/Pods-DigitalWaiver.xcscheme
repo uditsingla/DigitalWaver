@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B7B2FF7915A9467F23FB9DC6D576ABED"
+               BlueprintIdentifier = "C52F55371945F96AC2A1624EEC7F4C50"
                BuildableName = "Pods_DigitalWaiver.framework"
                BlueprintName = "Pods-DigitalWaiver"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B7B2FF7915A9467F23FB9DC6D576ABED"
+            BlueprintIdentifier = "C52F55371945F96AC2A1624EEC7F4C50"
             BuildableName = "Pods_DigitalWaiver.framework"
             BlueprintName = "Pods-DigitalWaiver"
             ReferencedContainer = "container:Pods.xcodeproj">

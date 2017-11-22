@@ -25,7 +25,6 @@
 		462E384E1FB23B1900920279 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E384D1FB23B1900920279 /* ProfileManager.swift */; };
 		462E38521FB37DF100920279 /* WaverI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E38511FB37DF100920279 /* WaverI.swift */; };
 		462E38541FB3817800920279 /* WaverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E38531FB3817800920279 /* WaverManager.swift */; };
-		462E38561FB382D100920279 /* WaverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E38551FB382D100920279 /* WaverVC.swift */; };
 		4647C2361FAF6D2C00BFB88D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4647C2351FAF6D2C00BFB88D /* AppDelegate.swift */; };
 		4647C23B1FAF6D2C00BFB88D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4647C2391FAF6D2C00BFB88D /* Main.storyboard */; };
 		4647C23D1FAF6D2C00BFB88D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4647C23C1FAF6D2C00BFB88D /* Assets.xcassets */; };
@@ -34,6 +33,8 @@
 		4647C2661FAF8BDF00BFB88D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4647C2621FAF8BDF00BFB88D /* ImageView.swift */; };
 		4647C26D1FAF92C500BFB88D /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4647C26C1FAF92C500BFB88D /* SignUpVC.swift */; };
 		4647C26F1FAF92E400BFB88D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4647C26E1FAF92E400BFB88D /* LoginVC.swift */; };
+		468E506B1FC5E5DD00B10D91 /* YPDrawSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E50691FC5E1F400B10D91 /* YPDrawSignatureView.swift */; };
+		468E506C1FC5FC7600B10D91 /* WaverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E38551FB382D100920279 /* WaverVC.swift */; };
 		4691CDF21FB4D683009667A9 /* SearchWaiverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691CDF11FB4D683009667A9 /* SearchWaiverVC.swift */; };
 		4691CDF51FB6F2A1009667A9 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691CDF41FB6F2A1009667A9 /* Validations.swift */; };
 		4691CDF71FB6F42B009667A9 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691CDF61FB6F42A009667A9 /* Strings.swift */; };
@@ -74,6 +75,7 @@
 		4647C2621FAF8BDF00BFB88D /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		4647C26C1FAF92C500BFB88D /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		4647C26E1FAF92E400BFB88D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		468E50691FC5E1F400B10D91 /* YPDrawSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPDrawSignatureView.swift; sourceTree = "<group>"; };
 		4691CDF11FB4D683009667A9 /* SearchWaiverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWaiverVC.swift; sourceTree = "<group>"; };
 		4691CDF41FB6F2A1009667A9 /* Validations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		4691CDF61FB6F42A009667A9 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		4647C2341FAF6D2C00BFB88D /* DigitalWaiver */ = {
 			isa = PBXGroup;
 			children = (
+				468E50681FC5E1D000B10D91 /* 3rd Party */,
 				4691CDF31FB6F264009667A9 /* Utility */,
 				462E382C1FB23A7300920279 /* Interfaces */,
 				462E37E81FB2392C00920279 /* Resources */,
@@ -237,6 +240,14 @@
 				4691CDF11FB4D683009667A9 /* SearchWaiverVC.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		468E50681FC5E1D000B10D91 /* 3rd Party */ = {
+			isa = PBXGroup;
+			children = (
+				468E50691FC5E1F400B10D91 /* YPDrawSignatureView.swift */,
+			);
+			path = "3rd Party";
 			sourceTree = "<group>";
 		};
 		4691CDF31FB6F264009667A9 /* Utility */ = {
@@ -389,7 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				462E38561FB382D100920279 /* WaverVC.swift in Sources */,
+				468E506C1FC5FC7600B10D91 /* WaverVC.swift in Sources */,
 				4647C2661FAF8BDF00BFB88D /* ImageView.swift in Sources */,
 				462E37DC1FB237B000920279 /* AuthManager.swift in Sources */,
 				4691CDFB1FB6FD52009667A9 /* WaiverCell.swift in Sources */,
@@ -401,6 +412,7 @@
 				4647C26F1FAF92E400BFB88D /* LoginVC.swift in Sources */,
 				469D26271FBB748100C9A8BD /* WaiverAddDetailsCell.swift in Sources */,
 				462E382B1FB2392D00920279 /* UIColor+Hex.swift in Sources */,
+				468E506B1FC5E5DD00B10D91 /* YPDrawSignatureView.swift in Sources */,
 				462E37DF1FB237B000920279 /* ModelManager.swift in Sources */,
 				462E38541FB3817800920279 /* WaverManager.swift in Sources */,
 				4647C2651FAF8BDF00BFB88D /* Button.swift in Sources */,
@@ -557,6 +569,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9J27945S3T;
 				INFOPLIST_FILE = DigitalWaiver/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.digital.waver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -575,6 +588,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9J27945S3T;
 				INFOPLIST_FILE = DigitalWaiver/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.digital.waver;
 				PRODUCT_NAME = "$(TARGET_NAME)";

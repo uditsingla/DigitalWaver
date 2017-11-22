@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -758,8 +759,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </pickerView>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bMp-y7-QSI" userLabel="WebView">
-                                <rect key="frame" x="800" y="40" width="728" height="964"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bMp-y7-QSI" userLabel="WebView">
+                                <rect key="frame" x="20" y="40" width="728" height="964"/>
                                 <subviews>
                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozH-zD-y6g">
                                         <rect key="frame" x="0.0" y="0.0" width="728" height="964"/>
@@ -790,10 +791,101 @@
                                     <constraint firstAttribute="bottom" secondItem="ozH-zD-y6g" secondAttribute="bottom" id="ziP-UU-Roe"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2k-Pw-8Pu">
+                                <rect key="frame" x="34" y="87" width="700" height="850"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="akv-Fg-BzI" customClass="YPDrawSignatureView" customModule="DigitalWaiver" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="700" height="700"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.066666666669999999" green="0.35294117650000001" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="strokeWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suscribe to Newsletter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gc7-Z1-LBy">
+                                        <rect key="frame" x="86" y="761" width="192" height="21.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCf-mn-8Cc" customClass="RoundedButton" customModule="DigitalWaiver" customModuleProvider="target">
+                                        <rect key="frame" x="350" y="735" width="110" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.90196078430000004" green="0.0" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="RESET">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="clearSignature:" destination="Ho9-Ar-3pU" eventType="touchUpInside" id="VLk-26-kFm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z3s-vW-EvG" customClass="RoundedButton" customModule="DigitalWaiver" customModuleProvider="target">
+                                        <rect key="frame" x="465" y="735" width="110" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.066666666669999999" green="0.35294117650000001" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="CANCEL">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancleSignature:" destination="Ho9-Ar-3pU" eventType="touchUpInside" id="sTT-fj-E2y"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0f-tO-7Mw" customClass="RoundedButton" customModule="DigitalWaiver" customModuleProvider="target">
+                                        <rect key="frame" x="580" y="735" width="110" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.066666666669999999" green="0.35294117650000001" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="SAVE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="saveSignature:" destination="Ho9-Ar-3pU" eventType="touchUpInside" id="BZl-2E-pPE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acG-VZ-aiC">
+                                        <rect key="frame" x="22" y="738" width="64" height="64"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="check"/>
+                                        <connections>
+                                            <action selector="setSubscription:" destination="Ho9-Ar-3pU" eventType="touchUpInside" id="fvQ-CR-CvV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="850" id="c1i-z0-ROX"/>
+                                    <constraint firstAttribute="width" constant="700" id="vTZ-QC-wnc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="G2k-Pw-8Pu" firstAttribute="centerX" secondItem="haS-yh-YGJ" secondAttribute="centerX" id="1Zc-oL-9ck"/>
                             <constraint firstItem="190-aK-XM5" firstAttribute="trailing" secondItem="Ku4-bD-fbZ" secondAttribute="trailing" constant="18" id="1hM-my-Q6Z"/>
+                            <constraint firstItem="G2k-Pw-8Pu" firstAttribute="centerY" secondItem="haS-yh-YGJ" secondAttribute="centerY" id="1sV-0r-SgP"/>
                             <constraint firstItem="IMY-Du-Maq" firstAttribute="top" secondItem="bKE-4r-gIo" secondAttribute="bottom" constant="20" id="2Uj-12-A04"/>
                             <constraint firstItem="Ku4-bD-fbZ" firstAttribute="top" secondItem="190-aK-XM5" secondAttribute="top" constant="30" id="5GD-xR-QOU"/>
                             <constraint firstItem="bMp-y7-QSI" firstAttribute="top" secondItem="190-aK-XM5" secondAttribute="top" constant="20" id="5gC-2w-tPz"/>
@@ -814,8 +906,10 @@
                         <outlet property="btnGender" destination="NXI-t2-9mz" id="9NB-3A-umV"/>
                         <outlet property="btnSign" destination="B50-hB-aIO" id="89b-vl-PaP"/>
                         <outlet property="btnSignMinor" destination="aQN-Xb-h7w" id="iJu-r0-Px6"/>
+                        <outlet property="btnSubscription" destination="acG-VZ-aiC" id="ph2-Pf-hea"/>
                         <outlet property="btnUpdateParticipants" destination="h7k-sP-tGq" id="lOc-Gz-Zcl"/>
                         <outlet property="pickerGender" destination="DDh-4n-wsR" id="P5E-Iw-0gG"/>
+                        <outlet property="signatureView" destination="akv-Fg-BzI" id="zcc-Lh-69B"/>
                         <outlet property="superOfInnerViewHeightConstraint" destination="cTI-BR-IS1" id="8BM-60-p5u"/>
                         <outlet property="superOfMainViewConstraint" destination="cBW-hI-WQH" id="ZTQ-lh-Ymg"/>
                         <outlet property="superOfUpdateParticipantsConstraint" destination="GQG-aB-gTR" id="Neb-f5-EhU"/>
@@ -826,6 +920,7 @@
                         <outlet property="txtNoOfParticipants" destination="hHD-K4-z0l" id="Cvl-Oy-nAQ"/>
                         <outlet property="txtPhone" destination="T89-Qc-wtR" id="5d5-IJ-DWh"/>
                         <outlet property="viewSuperGender" destination="TLD-v0-HyD" id="kz0-rn-ASd"/>
+                        <outlet property="viewSuperSignature" destination="G2k-Pw-8Pu" id="DS1-BD-0yL"/>
                         <outlet property="viewSuperSubviews" destination="jPm-Yp-sfV" id="rCA-Cs-hqX"/>
                         <outlet property="viewWeb" destination="bMp-y7-QSI" id="G3H-Sv-md4"/>
                         <outlet property="viewWebView" destination="ozH-zD-y6g" id="w2X-Rt-ybd"/>
@@ -1027,5 +1122,6 @@
     <resources>
         <image name="SearchIcon" width="20" height="20"/>
         <image name="add" width="20" height="20"/>
+        <image name="check" width="32" height="32"/>
     </resources>
 </document>

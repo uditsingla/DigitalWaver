@@ -7,13 +7,18 @@
 //
 
 import UIKit
-import EPSignature
+//import EPSignature
 import SVProgressHUD
 
 
 
-class AddParticipant: UIViewController,EPSignatureDelegate,UITableViewDelegate,UITableViewDataSource, UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,UIWebViewDelegate {
+class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource, UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,UIWebViewDelegate,YPSignatureDelegate {
+    
+    // Connect this Outlet to the Signature View
+    @IBOutlet weak var signatureView: YPDrawSignatureView!
 
+    @IBOutlet weak var btnSubscription: UIButton!
+    
     @IBOutlet weak var xConstarintOfClickToSign: NSLayoutConstraint!
     @IBOutlet weak var superOfUpdateParticipantsConstraint: NSLayoutConstraint!
     @IBOutlet weak var superOfMainViewConstraint: NSLayoutConstraint!
@@ -35,7 +40,8 @@ class AddParticipant: UIViewController,EPSignatureDelegate,UITableViewDelegate,U
     @IBOutlet weak var btnUpdateParticipants: RoundedButton!
     @IBOutlet weak var btnSign: RoundedButton!
 
-
+    @IBOutlet weak var viewSuperSignature: UIView!
+    
     var gender = "Select"
     
     var isNewsletterSubscribe = true
@@ -60,9 +66,104 @@ class AddParticipant: UIViewController,EPSignatureDelegate,UITableViewDelegate,U
     
     @IBOutlet weak var viewSuperGender: UIView!
     
+    // MARK: - Signature View Actions
+    
+    @IBAction func cancleSignature(_ sender: UIButton) {
+        viewSuperSignature.isHidden = true
+        self.signatureView.clear()
+        
+    }
+    
+    
+    // Function for clearing the content of signature view
+    @IBAction func clearSignature(_ sender: UIButton) {
+        // This is how the signature gets cleared
+        self.signatureView.clear()
+    }
+    
+    // Function for saving signature
+    @IBAction func saveSignature(_ sender: UIButton) {
+        // Getting the Signature Image from self.drawSignatureView using the method getSignature().
+        if let signatureImage = self.signatureView.getSignature(scale: 1) {
+            
+            // Saving signatureImage from the line above to the Photo Roll.
+            // The first time you do this, the app asks for access to your pictures.
+            //UIImageWriteToSavedPhotosAlbum(signatureImage, nil, nil, nil)
+            
+            
+            let imageData = UIImageJPEGRepresentation(signatureImage, 0.5)
+            
+            self.sendFinalImage = (imageData?.base64EncodedString(options: .endLineWithLineFeed))!
+            
+            debugPrint(self.sendFinalImage)
+
+            var dictData = [String : Any]()
+            
+            let userDefault = UserDefaults.standard
+            dictData["businessname"] = userDefault.string(forKey: "buisnessName")
+            dictData["groupname"] = groupName
+            dictData["mimetype"] = "image/jpeg"
+            dictData["filecontent"] = "\(self.sendFinalImage)"
+            dictData["filename"] = "signature.jpg"
+            dictData["phoneno"] = "\(self.txtPhone.text!)"
+            dictData["email"] = "\(self.txtEmail.text!)"
+            dictData["name"] = "\(self.txtName.text!)"
+            dictData["newsletter"] = "\(isNewsletterSubscribe)"
+            dictData["age"] = "\(self.txtAge.text!)"
+            dictData["gender"] = "\(gender)"
+            
+            if(btnSignMinor.currentTitle == "Sign Major")
+            {
+                dictData["phoneno"] = " "
+                dictData["email"] = " "
+                dictData["age"] = " "
+                dictData["gender"] = " "
+            }
+            
+            if(gender == "Select")
+            {
+                dictData["gender"] = " "
+            }
+            
+            print(dictData)
+            
+            ModelManager.sharedInstance.waverManager.addNewParticipant(participantInfo: dictData) { (isSuccess, strMessage) in
+                self.viewSuperSignature.isHidden = true
+                self.sendFinalImage = ""
+                self.resetData()
+                self.getWaiverDetail()
+            }
+            
+            
+            // Since the Signature is now saved to the Photo Roll, the View can be cleared anyway.
+            self.signatureView.clear()
+        }
+    }
+    
+    // MARK: - Delegate Methods
+    
+    // The delegate functions gives feedback to the instanciating class. All functions are optional,
+    // meaning you just implement the one you need.
+    
+    // didStart() is called right after the first touch is registered in the view.
+    // For example, this can be used if the view is embedded in a scroll view, temporary
+    // stopping it from scrolling while signing.
+    func didStart() {
+        print("Started Drawing")
+    }
+    
+    // didFinish() is called rigth after the last touch of a gesture is registered in the view.
+    // Can be used to enabe scrolling in a scroll view if it has previous been disabled.
+    func didFinish() {
+        print("Finished Drawing")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        signatureView.delegate = self
+
+        
         // Do any additional setup after loading the view.
         btnUpdateParticipants.isHidden = true
         
@@ -201,13 +302,14 @@ class AddParticipant: UIViewController,EPSignatureDelegate,UITableViewDelegate,U
                 }
             }
             
+            viewSuperSignature.isHidden = false
+
             
-            let signatureVC = EPSignatureViewController(signatureDelegate: self, showsDate: true, showsSaveSignatureOption: false)
-            // signatureVC.subtitleText = "I agree to the terms and conditions"
-            signatureVC.title = "Signature"
+            //let signatureVC = EPSignatureViewController(signatureDelegate: self, showsDate: true, showsSaveSignatureOption: false)
+            //signatureVC.title = "Signature"
             
-            let nav = UINavigationController(rootViewController: signatureVC)
-            present(nav, animated: true, completion: nil)
+//            let nav = UINavigationController(rootViewController: signatureVC)
+//            present(nav, animated: true, completion: nil)
         }
         else
         {
@@ -268,6 +370,18 @@ class AddParticipant: UIViewController,EPSignatureDelegate,UITableViewDelegate,U
                 viewWebView.loadRequest(request)
             }
         }
+    }
+    
+    
+    func addParticiant()  {
+        
+        print(UserDefaults.standard.object(forKey: "arrayDictData") as! NSArray)
+        //API Hit
+        //        ModelManager.sharedInstance.waverManager.addNewParticipant(participantInfo: dictData) { (isSuccess, strMessage) in
+        //
+        self.resetData()
+        self.getWaiverDetail()
+        //        }
     }
     
     // MARK: - TextField Delegate
@@ -379,8 +493,9 @@ class AddParticipant: UIViewController,EPSignatureDelegate,UITableViewDelegate,U
     }
 
     
-    // MARK: - Signature Delegates
+    
 
+    /*
     func epSignature(_: EPSignature.EPSignatureViewController, didCancel error: NSError)
     {
         print("Cancel")
@@ -388,60 +503,31 @@ class AddParticipant: UIViewController,EPSignatureDelegate,UITableViewDelegate,U
     
     func epSignature(_: EPSignature.EPSignatureViewController, didSign signatureImage: UIImage, boundingRect: CGRect)
     {
-            let imageData = UIImageJPEGRepresentation(signatureImage, 0.5)
-            self.sendFinalImage = (imageData?.base64EncodedString(options: .endLineWithLineFeed))!
-        var dictData = [String : Any]()
+     
+    }
+ 
+ func epSignature(_: EPSignatureViewController, isSubscriptionRequired : Bool)
+ {
+ isNewsletterSubscribe = isSubscriptionRequired
+ }
+ 
+ */
+    
+    // MARK: - Signature Delegates
+    @IBAction func setSubscription(_ sender: UIButton) {
         
-        let userDefault = UserDefaults.standard
-        dictData["businessname"] = userDefault.string(forKey: "buisnessName")
-        dictData["groupname"] = groupName
-        dictData["mimetype"] = "image/jpeg"
-        dictData["filecontent"] = "\(self.sendFinalImage)"
-        dictData["filename"] = "signature.jpg"
-        dictData["phoneno"] = "\(self.txtPhone.text!)"
-        dictData["email"] = "\(self.txtEmail.text!)"
-        dictData["name"] = "\(self.txtName.text!)"
-        dictData["newsletter"] = "\(isNewsletterSubscribe)"
-        dictData["age"] = "\(self.txtAge.text!)"
-        dictData["gender"] = "\(gender)"
-        
-       if(btnSignMinor.currentTitle == "Sign Major")
-       {
-        dictData["phoneno"] = " "
-        dictData["email"] = " "
-        dictData["age"] = " "
-        dictData["gender"] = " "
-       }
-        
-        if(gender == "Select")
+        if(isNewsletterSubscribe)
         {
-            dictData["gender"] = " "
+            isNewsletterSubscribe = false
+            btnSubscription.setImage(#imageLiteral(resourceName: "uncheck"), for: .normal)
         }
-        
-        print(dictData)
-        
-        ModelManager.sharedInstance.waverManager.addNewParticipant(participantInfo: dictData) { (isSuccess, strMessage) in
-        self.resetData()
-        self.getWaiverDetail()
+        else
+        {
+            isNewsletterSubscribe = true
+            btnSubscription.setImage(#imageLiteral(resourceName: "check"), for: .normal)
         }
     }
     
-    func addParticiant()  {
-        
-        print(UserDefaults.standard.object(forKey: "arrayDictData") as! NSArray)
-        //API Hit
-//        ModelManager.sharedInstance.waverManager.addNewParticipant(participantInfo: dictData) { (isSuccess, strMessage) in
-//
-            self.resetData()
-            self.getWaiverDetail()
-//        }
-    }
-    
-    
-    func epSignature(_: EPSignatureViewController, isSubscriptionRequired : Bool)
-    {
-        isNewsletterSubscribe = isSubscriptionRequired
-    }
     
     // MARK: - Local Storage
     func saveDataInLocalDB(dictData : [String : Any])

@@ -14,7 +14,7 @@ target 'DigitalWaiver' do
   #Image Cache
     pod 'SDWebImage', '~> 4.1'
     #Signature Capture
-    pod "EPSignature"
+    #pod "EPSignature"
     
     pod 'AlamofireImage'
     pod 'ReachabilitySwift', '~> 3'
