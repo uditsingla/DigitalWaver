@@ -12,19 +12,33 @@ import SearchTextField
 
 class SearchWaiverVC: UIViewController {
 
+    @IBOutlet weak var btnBacktoLogin: RoundedButton!
     @IBOutlet weak var txtSearch: SearchTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+        let navButton = UIButton.init(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        navButton.setImage(#imageLiteral(resourceName: "settings"), for: .normal)
+        //btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        navButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: navButton), animated: true);
+        self.navigationItem.title = "Search Waiver"
         configureCustomSearchTextField()
-        
-        
         
     }
     
-
+    @objc func addTapped()
+    {
+        debugPrint(31234)
+        btnBacktoLogin.isHidden = false
+    }
+    @IBAction func actionBackToLogin(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

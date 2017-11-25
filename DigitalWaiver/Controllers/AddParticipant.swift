@@ -13,6 +13,7 @@ import SVProgressHUD
 
 
 class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource, UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,UIWebViewDelegate,YPSignatureDelegate {
+
     
     // Connect this Outlet to the Signature View
     @IBOutlet weak var signatureView: YPDrawSignatureView!
@@ -163,6 +164,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
 
         signatureView.delegate = self
 
+        signatureView.layer.borderColor = UIColor.gray.cgColor
+        signatureView.layer.borderWidth = 1
         
         // Do any additional setup after loading the view.
         btnUpdateParticipants.isHidden = true
@@ -198,8 +201,17 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     // MARK: - Custom Actions
     
+    @IBAction func actionIAgree(_ sender: UIButton) {
+        
+        sender.setImage(#imageLiteral(resourceName: "check"), for: .normal)
+        viewWeb.isHidden = true
+        
+    }
+    
     @IBAction func actionCross(_ sender: UIButton) {
         viewWeb.isHidden = true
+        
+        viewWebView.stopLoading()
 
     }
     
