@@ -35,6 +35,7 @@
 		4647C26F1FAF92E400BFB88D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4647C26E1FAF92E400BFB88D /* LoginVC.swift */; };
 		468E506B1FC5E5DD00B10D91 /* YPDrawSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468E50691FC5E1F400B10D91 /* YPDrawSignatureView.swift */; };
 		468E506C1FC5FC7600B10D91 /* WaverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E38551FB382D100920279 /* WaverVC.swift */; };
+		468E506F1FCAF6B600B10D91 /* DigitalWaiver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 468E506D1FCAF6B600B10D91 /* DigitalWaiver.xcdatamodeld */; };
 		4691CDF21FB4D683009667A9 /* SearchWaiverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691CDF11FB4D683009667A9 /* SearchWaiverVC.swift */; };
 		4691CDF51FB6F2A1009667A9 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691CDF41FB6F2A1009667A9 /* Validations.swift */; };
 		4691CDF71FB6F42B009667A9 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691CDF61FB6F42A009667A9 /* Strings.swift */; };
@@ -76,6 +77,7 @@
 		4647C26C1FAF92C500BFB88D /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		4647C26E1FAF92E400BFB88D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		468E50691FC5E1F400B10D91 /* YPDrawSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPDrawSignatureView.swift; sourceTree = "<group>"; };
+		468E506E1FCAF6B600B10D91 /* DigitalWaiver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DigitalWaiver.xcdatamodel; sourceTree = "<group>"; };
 		4691CDF11FB4D683009667A9 /* SearchWaiverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWaiverVC.swift; sourceTree = "<group>"; };
 		4691CDF41FB6F2A1009667A9 /* Validations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		4691CDF61FB6F42A009667A9 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				462E37F31FB2392C00920279 /* CustomFonts */,
 				462E380E1FB2392D00920279 /* UIAlertView */,
 				462E38101FB2392D00920279 /* Utilities */,
+				468E506D1FCAF6B600B10D91 /* DigitalWaiver.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				4691CDF71FB6F42B009667A9 /* Strings.swift in Sources */,
 				462E382A1FB2392D00920279 /* ShowAlerts.swift in Sources */,
 				4691CDF21FB4D683009667A9 /* SearchWaiverVC.swift in Sources */,
+				468E506F1FCAF6B600B10D91 /* DigitalWaiver.xcdatamodeld in Sources */,
 				4647C2361FAF6D2C00BFB88D /* AppDelegate.swift in Sources */,
 				462E38151FB2392D00920279 /* UILabel+Customization.swift in Sources */,
 				462E38191FB2392D00920279 /* Constants.swift in Sources */,
@@ -621,6 +625,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		468E506D1FCAF6B600B10D91 /* DigitalWaiver.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				468E506E1FCAF6B600B10D91 /* DigitalWaiver.xcdatamodel */,
+			);
+			currentVersion = 468E506E1FCAF6B600B10D91 /* DigitalWaiver.xcdatamodel */;
+			path = DigitalWaiver.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4647C22A1FAF6D2C00BFB88D /* Project object */;
 }

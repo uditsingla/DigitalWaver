@@ -23,22 +23,14 @@ class SearchWaiverVC: UIViewController {
         let navButton = UIButton.init(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         navButton.setImage(#imageLiteral(resourceName: "settings"), for: .normal)
         //btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        navButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
+        navButton.addTarget(self, action: #selector(actionSettings), for: .touchUpInside)
         self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: navButton), animated: true);
         self.navigationItem.title = "Search Waiver"
         configureCustomSearchTextField()
         
     }
     
-    @objc func addTapped()
-    {
-        debugPrint(31234)
-        btnBacktoLogin.isHidden = false
-    }
-    @IBAction func actionBackToLogin(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -46,7 +38,7 @@ class SearchWaiverVC: UIViewController {
     }
     
     
-    // MARK: - Configure custom zipcode text field
+    // MARK: - Configure search text field
     fileprivate func configureCustomSearchTextField() {
         // Set theme - Default: light
         txtSearch.theme = SearchTextFieldTheme.darkTheme()
@@ -76,12 +68,16 @@ class SearchWaiverVC: UIViewController {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let waiverVC = sb.instantiateViewController(withIdentifier: "AddParticipant") as! AddParticipant
             waiverVC.isWaverSelected = true
-            waiverVC.strGroupName = item.title
-            self.navigationController?.pushViewController(waiverVC, animated: true)
             
             // Do whatever you want with the picked item
+
+            let arrData = item.title.split(separator: "-")
+            waiverVC.strGroupName = String(arrData[0])
+
             self.txtSearch.text = item.subtitle
             self.txtSearch.resignFirstResponder()
+            
+            self.navigationController?.pushViewController(waiverVC, animated: true)
         }
         
         // Update data source when the user stops typing
@@ -115,7 +111,17 @@ class SearchWaiverVC: UIViewController {
             }
             } as (() -> Void)
     }
-
+    
+    // MARK: - Actions
+    @objc func actionSettings()
+    {
+        btnBacktoLogin.isHidden = false
+    }
+    
+    @IBAction func actionBackToLogin(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

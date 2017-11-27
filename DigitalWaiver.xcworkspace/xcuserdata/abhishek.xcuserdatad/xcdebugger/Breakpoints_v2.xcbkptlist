@@ -90,11 +90,11 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Controllers/AddParticipant.swift"
-                  timestampString = "533328108.326876"
+                  timestampString = "533378950.461842"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "366"
-                  endingLineNumber = "366"
+                  startingLineNumber = "376"
+                  endingLineNumber = "376"
                   offsetFromSymbolStart = "1511">
                </Location>
                <Location
@@ -105,11 +105,11 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Controllers/AddParticipant.swift"
-                  timestampString = "533328108.330602"
+                  timestampString = "533378950.465571"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "366"
-                  endingLineNumber = "366"
+                  startingLineNumber = "376"
+                  endingLineNumber = "376"
                   offsetFromSymbolStart = "4108">
                </Location>
             </Locations>
@@ -138,13 +138,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/AppDelegate.swift"
-            timestampString = "532986560.931981"
+            timestampString = "533397568.182375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "applicationWillEnterForeground(_:)"
-            landmarkType = "7">
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -170,7 +170,7 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/WebAccessLayer/BaseWebAccessLayer.swift"
-                  timestampString = "533328108.349948"
+                  timestampString = "533378950.486291"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -185,7 +185,7 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/WebAccessLayer/BaseWebAccessLayer.swift"
-                  timestampString = "533328108.353293"
+                  timestampString = "533378950.489524"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "45"
@@ -250,7 +250,7 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/WebAccessLayer/BaseWebAccessLayer.swift"
-                  timestampString = "533328108.373491"
+                  timestampString = "533378950.510187"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
@@ -265,7 +265,7 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/WebAccessLayer/BaseWebAccessLayer.swift"
-                  timestampString = "533328108.377421"
+                  timestampString = "533378950.513644"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "34"
@@ -298,7 +298,7 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/WebAccessLayer/BaseWebAccessLayer.swift"
-                  timestampString = "533328108.386212"
+                  timestampString = "533378950.521498"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "41"
@@ -313,7 +313,7 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/WebAccessLayer/BaseWebAccessLayer.swift"
-                  timestampString = "533328108.389578"
+                  timestampString = "533378950.525654"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/AppDelegate.swift"
-            timestampString = "532986560.932813"
+            timestampString = "533397568.183071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "applicationWillEnterForeground(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/AppDelegate.swift"
-            timestampString = "532986560.932884"
+            timestampString = "533397568.183578"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "applicationWillEnterForeground(_:)"
             landmarkType = "7">
          </BreakpointContent>
