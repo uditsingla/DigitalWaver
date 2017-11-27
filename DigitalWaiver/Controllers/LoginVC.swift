@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 
 class LoginVC: UIViewController {
+    fileprivate let groupPresenter = GroupsPresenter()
 
     @IBOutlet weak var txtLogin: UITextField!
     @IBOutlet weak var txtPassword: UITextField!

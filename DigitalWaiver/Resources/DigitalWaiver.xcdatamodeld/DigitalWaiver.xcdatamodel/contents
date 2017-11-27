@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Groups" representedClassName="Groups" syncable="YES" codeGenerationType="class">
+    <entity name="Groups" representedClassName="Groups" syncable="YES">
         <attribute name="buisness" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="groupname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="issynched" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="participants" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="participantsno" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waverlink" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="groupToParticipentRelation" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Participants" inverseName="participentToGroupRelation" inverseEntity="Participants" syncable="YES"/>
     </entity>
-    <entity name="Participants" representedClassName="Participants" syncable="YES" codeGenerationType="class">
+    <entity name="Participants" representedClassName="Participants" syncable="YES">
         <attribute name="age" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="businessname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,9 +22,10 @@
         <attribute name="newsletter" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="participantsNo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneno" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="participentToGroupRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groups" inverseName="groupToParticipentRelation" inverseEntity="Groups" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Groups" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Participants" positionX="-54" positionY="27" width="128" height="240"/>
+        <element name="Groups" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Participants" positionX="-54" positionY="27" width="128" height="255"/>
     </elements>
 </model>

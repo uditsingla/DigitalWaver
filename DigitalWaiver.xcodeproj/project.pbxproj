@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BE421161FCBFF8100E6A0A0 /* Groups+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE421141FCBFF8100E6A0A0 /* Groups+CoreDataClass.swift */; };
+		1BE421171FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE421151FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift */; };
+		1BE4211A1FCBFF9A00E6A0A0 /* Participants+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE421181FCBFF9A00E6A0A0 /* Participants+CoreDataClass.swift */; };
+		1BE4211B1FCBFF9A00E6A0A0 /* Participants+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE421191FCBFF9A00E6A0A0 /* Participants+CoreDataProperties.swift */; };
+		1BE421201FCC04EA00E6A0A0 /* GroupsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4211F1FCC01F600E6A0A0 /* GroupsPresenter.swift */; };
+		1BE421211FCC050700E6A0A0 /* AppSharedInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4211D1FCC009100E6A0A0 /* AppSharedInstance.swift */; };
 		462E37CB1FB0DA7E00920279 /* AddParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E37CA1FB0DA7E00920279 /* AddParticipant.swift */; };
 		462E37CE1FB2368400920279 /* BaseWebAccessLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E37CD1FB2368300920279 /* BaseWebAccessLayer.swift */; };
 		462E37DC1FB237B000920279 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E37D01FB237AF00920279 /* AuthManager.swift */; };
@@ -45,6 +51,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BE421141FCBFF8100E6A0A0 /* Groups+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Groups+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1BE421151FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Groups+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1BE421181FCBFF9A00E6A0A0 /* Participants+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Participants+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1BE421191FCBFF9A00E6A0A0 /* Participants+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Participants+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1BE4211D1FCC009100E6A0A0 /* AppSharedInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSharedInstance.swift; sourceTree = "<group>"; };
+		1BE4211F1FCC01F600E6A0A0 /* GroupsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsPresenter.swift; sourceTree = "<group>"; };
 		458396CA36E5053358B06747 /* Pods-DigitalWaiver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DigitalWaiver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DigitalWaiver/Pods-DigitalWaiver.debug.xcconfig"; sourceTree = "<group>"; };
 		45902BD06C8383D9FBFA6DE9 /* Pods_DigitalWaiver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DigitalWaiver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		462E37CA1FB0DA7E00920279 /* AddParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParticipant.swift; sourceTree = "<group>"; };
@@ -104,6 +116,57 @@
 				45902BD06C8383D9FBFA6DE9 /* Pods_DigitalWaiver.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1BE421101FCBFE1600E6A0A0 /* DataAccessLayer */ = {
+			isa = PBXGroup;
+			children = (
+				1BE421111FCBFE1600E6A0A0 /* DataModelEntities */,
+			);
+			path = DataAccessLayer;
+			sourceTree = "<group>";
+		};
+		1BE421111FCBFE1600E6A0A0 /* DataModelEntities */ = {
+			isa = PBXGroup;
+			children = (
+				1BE421121FCBFE4600E6A0A0 /* Groups */,
+				1BE421131FCBFE4600E6A0A0 /* Participents */,
+			);
+			path = DataModelEntities;
+			sourceTree = "<group>";
+		};
+		1BE421121FCBFE4600E6A0A0 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				1BE421141FCBFF8100E6A0A0 /* Groups+CoreDataClass.swift */,
+				1BE421151FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
+		1BE421131FCBFE4600E6A0A0 /* Participents */ = {
+			isa = PBXGroup;
+			children = (
+				1BE421181FCBFF9A00E6A0A0 /* Participants+CoreDataClass.swift */,
+				1BE421191FCBFF9A00E6A0A0 /* Participants+CoreDataProperties.swift */,
+			);
+			path = Participents;
+			sourceTree = "<group>";
+		};
+		1BE4211C1FCC009100E6A0A0 /* AppSharedInstance */ = {
+			isa = PBXGroup;
+			children = (
+				1BE4211D1FCC009100E6A0A0 /* AppSharedInstance.swift */,
+			);
+			path = AppSharedInstance;
+			sourceTree = "<group>";
+		};
+		1BE4211E1FCC018C00E6A0A0 /* BusinessAccessLayer */ = {
+			isa = PBXGroup;
+			children = (
+				1BE4211F1FCC01F600E6A0A0 /* GroupsPresenter.swift */,
+			);
+			path = BusinessAccessLayer;
 			sourceTree = "<group>";
 		};
 		462E37CC1FB2368300920279 /* WebAccessLayer */ = {
@@ -172,6 +235,7 @@
 		462E38101FB2392D00920279 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1BE4211C1FCC009100E6A0A0 /* AppSharedInstance */,
 				462E38111FB2392D00920279 /* UIColor+Hex.swift */,
 			);
 			path = Utilities;
@@ -212,7 +276,9 @@
 				462E382C1FB23A7300920279 /* Interfaces */,
 				462E37E81FB2392C00920279 /* Resources */,
 				462E37CF1FB237AF00920279 /* Model */,
+				1BE421101FCBFE1600E6A0A0 /* DataAccessLayer */,
 				462E37CC1FB2368300920279 /* WebAccessLayer */,
+				1BE4211E1FCC018C00E6A0A0 /* BusinessAccessLayer */,
 				4647C2601FAF8BDF00BFB88D /* SubClasses */,
 				4647C2691FAF928300BFB88D /* Controllers */,
 				4647C2351FAF6D2C00BFB88D /* AppDelegate.swift */,
@@ -403,11 +469,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE421211FCC050700E6A0A0 /* AppSharedInstance.swift in Sources */,
+				1BE421201FCC04EA00E6A0A0 /* GroupsPresenter.swift in Sources */,
 				468E506C1FC5FC7600B10D91 /* WaverVC.swift in Sources */,
 				4647C2661FAF8BDF00BFB88D /* ImageView.swift in Sources */,
 				462E37DC1FB237B000920279 /* AuthManager.swift in Sources */,
 				4691CDFB1FB6FD52009667A9 /* WaiverCell.swift in Sources */,
 				462E37CE1FB2368400920279 /* BaseWebAccessLayer.swift in Sources */,
+				1BE4211B1FCBFF9A00E6A0A0 /* Participants+CoreDataProperties.swift in Sources */,
 				4691CDF51FB6F2A1009667A9 /* Validations.swift in Sources */,
 				462E37CB1FB0DA7E00920279 /* AddParticipant.swift in Sources */,
 				462E38131FB2392D00920279 /* String+ContactValidation.swift in Sources */,
@@ -415,6 +484,8 @@
 				4647C26F1FAF92E400BFB88D /* LoginVC.swift in Sources */,
 				469D26271FBB748100C9A8BD /* WaiverAddDetailsCell.swift in Sources */,
 				462E382B1FB2392D00920279 /* UIColor+Hex.swift in Sources */,
+				1BE4211A1FCBFF9A00E6A0A0 /* Participants+CoreDataClass.swift in Sources */,
+				1BE421161FCBFF8100E6A0A0 /* Groups+CoreDataClass.swift in Sources */,
 				468E506B1FC5E5DD00B10D91 /* YPDrawSignatureView.swift in Sources */,
 				462E37DF1FB237B000920279 /* ModelManager.swift in Sources */,
 				462E38541FB3817800920279 /* WaverManager.swift in Sources */,
@@ -423,6 +494,7 @@
 				462E384E1FB23B1900920279 /* ProfileManager.swift in Sources */,
 				4647C26D1FAF92C500BFB88D /* SignUpVC.swift in Sources */,
 				462E38171FB2392D00920279 /* UIView+Customization.swift in Sources */,
+				1BE421171FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift in Sources */,
 				462E38521FB37DF100920279 /* WaverI.swift in Sources */,
 				462E384C1FB23A7300920279 /* UserI.swift in Sources */,
 				462E38161FB2392D00920279 /* UITextfield+Customization.swift in Sources */,
