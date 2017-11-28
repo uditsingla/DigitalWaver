@@ -24,8 +24,6 @@ class WaverVC: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,6 +141,8 @@ class WaverVC: UIViewController,UITextFieldDelegate {
             }
         }
         
+        ModelManager.sharedInstance.waverManager.SaveGroupDataInDB(groupData: dictData as NSDictionary)
+
     }
     
     func addParticiant(dictData : [String : Any])

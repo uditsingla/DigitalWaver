@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class WaverManager: NSObject {
+    let managedObjectContext = AppSharedInstance.sharedInstance.managedObjectContext
+    var groupModelEntity: NSManagedObject? = nil
 
     func addWaver(userInfo: [String : Any], handler : @escaping (Bool , String) -> Void)
     {
@@ -213,4 +216,50 @@ class WaverManager: NSObject {
         }
     }
 
+    func SaveGroupDataInDB (groupData:NSDictionary) {
+        let predicate = NSPredicate(format: "groupname==%@", groupData.value(forKey: "group_name") as! CVarArg)
+        self.removeIfDataExistForProfileId(dataID: String(describing: groupData.value(forKey: "group_name")), withPredicate: predicate, forEntityName: "Groups")
+        
+        print("groupData == \(groupData)")
+        // Create Entity Description
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Groups", in: self.managedObjectContext)
+        
+        let groupModelEntity1 = NSManagedObject(entity: entityDescription!, insertInto: managedObjectContext) as! Groups
+        groupModelEntity1.buisness = groupData.value(forKey: "businessname") as? String
+        groupModelEntity1.groupname = groupData.value(forKey: "group_name") as? String
+        groupModelEntity1.waverlink = groupData.value(forKey: "link") as? String
+        groupModelEntity1.participantsno = groupData.value(forKey: "participants_no") as? String
+        groupModelEntity1.issynched = false
+
+        do {
+            try self.managedObjectContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        self.groupModelEntity = groupModelEntity1
+
+    }
+    
+    //******************************************************************************************************************************************
+    // MARK: remove data if exists in Coredata
+    
+    func removeIfDataExistForProfileId (dataID: String, withPredicate: NSPredicate, forEntityName: String) {
+        print("removeIfDataExistForProfileId")
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: forEntityName)
+        
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        if ((resultData?.count)! > 0) {
+            for object in resultData! {
+                self.managedObjectContext.delete(object)
+            }
+            do {
+                try self.managedObjectContext.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+    }
 }

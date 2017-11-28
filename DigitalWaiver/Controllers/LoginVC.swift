@@ -38,48 +38,10 @@ class LoginVC: UIViewController {
             return
         }
         
-        var  dictData : [String : Any] =  [String : Any]()
-        dictData["email"] = txtLogin.text!
-        dictData["password"] = txtPassword.text!
-//        dictData["email"] = "test@gmail.com"
-//        dictData["password"] = "123456"
-        
-        
-        SVProgressHUD.show(withStatus: "Loading.....")
-        
-        ModelManager.sharedInstance.authManager.userLogin(userInfo: dictData) { (userObj, isSuccess, strMessage) in
-            
-            SVProgressHUD.dismiss()
-            
-            if(isSuccess)
-            {
-                print("Login Done")
-                
-                ModelManager.sharedInstance.waverManager.getBuisnessName(participantInfo: nil, handler: { (isSuccess, strMessage) in
-                    
-                    if (isSuccess)
-                    {
-                        ModelManager.sharedInstance.authManager.setUserDefaultValues()
-                        
-                    let sb = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = sb.instantiateViewController(withIdentifier: "SearchWaiverVC") as! SearchWaiverVC
-                    self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                    else{
-                        
-                        SVProgressHUD.showInfo(withStatus: strMessage)
-                        SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
-                    }
-                })
-                //self.performSegue(withIdentifier: "goto_homeview", sender: nil)
-                
-            }
-            else
-            {
-                SVProgressHUD.showError(withStatus: strMessage)
-                SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
-            }
-            
+        DispatchQueue.main.async {
+            self.groupPresenter.attachView(self as GroupView)
+            self.groupPresenter.getNewData(email: self.txtLogin.text!, password: self.txtPassword.text!)
+
         }
         
     }
@@ -95,4 +57,31 @@ class LoginVC: UIViewController {
     }
     */
 
+}
+
+extension LoginVC: GroupView {
+    func startLoading() {
+        SVProgressHUD.show(withStatus: "Loading.....")
+
+    }
+    
+    func finishLoading() {
+        SVProgressHUD.dismiss()
+
+    }
+    
+    func finishLoadingWithSuccess() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SearchWaiverVC") as! SearchWaiverVC
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+    
+    func showError(withStatus: String) {
+        SVProgressHUD.showInfo(withStatus: withStatus)
+    }
+    
+    func dismissWithDelay(withDelay: Double) {
+        SVProgressHUD.dismiss(withDelay: withDelay)
+    }
 }
