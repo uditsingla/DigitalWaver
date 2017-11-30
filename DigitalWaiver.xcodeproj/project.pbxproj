@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BB554CE1FCE84D300B23212 /* ParticipentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB554CD1FCE84D300B23212 /* ParticipentPresenter.swift */; };
 		1BE421161FCBFF8100E6A0A0 /* Groups+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE421141FCBFF8100E6A0A0 /* Groups+CoreDataClass.swift */; };
 		1BE421171FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE421151FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift */; };
 		1BE4211A1FCBFF9A00E6A0A0 /* Participants+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE421181FCBFF9A00E6A0A0 /* Participants+CoreDataClass.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BB554CD1FCE84D300B23212 /* ParticipentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipentPresenter.swift; sourceTree = "<group>"; };
 		1BE421141FCBFF8100E6A0A0 /* Groups+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Groups+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1BE421151FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Groups+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BE421181FCBFF9A00E6A0A0 /* Participants+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Participants+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE4211F1FCC01F600E6A0A0 /* GroupsPresenter.swift */,
+				1BB554CD1FCE84D300B23212 /* ParticipentPresenter.swift */,
 			);
 			path = BusinessAccessLayer;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				4647C26D1FAF92C500BFB88D /* SignUpVC.swift in Sources */,
 				462E38171FB2392D00920279 /* UIView+Customization.swift in Sources */,
 				1BE421171FCBFF8100E6A0A0 /* Groups+CoreDataProperties.swift in Sources */,
+				1BB554CE1FCE84D300B23212 /* ParticipentPresenter.swift in Sources */,
 				462E38521FB37DF100920279 /* WaverI.swift in Sources */,
 				462E384C1FB23A7300920279 /* UserI.swift in Sources */,
 				462E38161FB2392D00920279 /* UITextfield+Customization.swift in Sources */,

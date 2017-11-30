@@ -14,7 +14,8 @@ import SVProgressHUD
 
 class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource, UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,UIWebViewDelegate,YPSignatureDelegate {
 
-    
+    fileprivate let participentPresenter = ParticipentPresenter()
+
     // Connect this Outlet to the Signature View
     @IBOutlet weak var signatureView: YPDrawSignatureView!
 
@@ -128,15 +129,17 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             print(dictData)
             
-            ModelManager.sharedInstance.waverManager.addNewParticipant(participantInfo: dictData) { (isSuccess, strMessage) in
-                self.viewSuperSignature.isHidden = true
-                self.sendFinalImage = ""
-                self.resetData()
-                self.getWaiverDetail()
+            
+//            local db
+            ModelManager.sharedInstance.waverManager.SaveParticipentDataInDB(participentData: dictData as NSDictionary)
+//            push
+            DispatchQueue.main.async {
+                self.participentPresenter.attachView(self as ParticipentView)
+                self.participentPresenter.addNewParticipant(participantInfo: dictData)
+                
             }
-            
-            
             // Since the Signature is now saved to the Photo Roll, the View can be cleared anyway.
+
             self.signatureView.clear()
         }
     }
@@ -478,6 +481,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             self.arrParticipants.removeAllObjects()
             self.arrParticipants.addObjects(from: arrResponse as! [WaverI])
+               
+
             self.tblParticipants.reloadData()
             }
             
@@ -553,8 +558,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         dictData["mimetype"] = "image/jpeg"
         dictData["filecontent"] = "\(self.sendFinalImage)"
         dictData["filename"] = "signature.jpg"
-        dictData["phoneno"] = "\(self.txtPhone.text!)"
-        dictData["email"] = "\(self.txtEmail.text!)"
+     
         dictData["name"] = "\(self.txtName.text!)"
         dictData["newsletter"] = "\(isNewsletterSubscribe)"
         dictData["age"] = "\(self.txtAge.text!)"
@@ -628,4 +632,33 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
 
+}
+
+extension AddParticipant: ParticipentView {
+    func startLoading() {
+        SVProgressHUD.show(withStatus: "Loading.....")
+        
+    }
+    
+    func finishLoading() {
+        SVProgressHUD.dismiss()
+        self.viewSuperSignature.isHidden = true
+        self.sendFinalImage = ""
+        self.resetData()
+        self.getWaiverDetail()
+
+    }
+    
+    func finishLoadingWithSuccess() {
+        
+    }
+    
+    
+    func showError(withStatus: String) {
+        SVProgressHUD.showInfo(withStatus: withStatus)
+    }
+    
+    func dismissWithDelay(withDelay: Double) {
+        SVProgressHUD.dismiss(withDelay: withDelay)
+    }
 }

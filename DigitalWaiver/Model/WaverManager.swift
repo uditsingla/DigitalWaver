@@ -262,4 +262,36 @@ class WaverManager: NSObject {
             }
         }
     }
+    
+    func SaveParticipentDataInDB (participentData:NSDictionary) {
+//        let predicate = NSPredicate(format: "groupname==%@", participentData.value(forKey: "group_name") as! CVarArg)
+//        self.removeIfDataExistForProfileId(dataID: String(describing: participentData.value(forKey: "group_name")), withPredicate: predicate, forEntityName: "Groups")
+//
+        print("participentData == \(participentData)")
+        // Create Entity Description
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Participants", in: self.managedObjectContext)
+        
+        let participentModelEntity1 = NSManagedObject(entity: entityDescription!, insertInto: managedObjectContext) as! Participants
+        participentModelEntity1.age = participentData.value(forKey: "age") as? String
+        participentModelEntity1.businessname = participentData.value(forKey: "businessname") as? String
+        participentModelEntity1.email = participentData.value(forKey: "email") as? String
+        participentModelEntity1.filecontent = participentData.value(forKey: "filecontent") as? String
+        participentModelEntity1.issynched = false
+        participentModelEntity1.filename = participentData.value(forKey: "filename") as? String
+        participentModelEntity1.gender = participentData.value(forKey: "gender") as? String
+        participentModelEntity1.groupname = participentData.value(forKey: "groupname") as? String
+        participentModelEntity1.mimetype = participentData.value(forKey: "mimetype") as? String
+        participentModelEntity1.name = participentData.value(forKey: "name") as? String
+        participentModelEntity1.newsletter = (participentData.value(forKey: "newsletter") as? Bool)!
+        participentModelEntity1.participantsNo = participentData.value(forKey: "participants_no") as? String
+        participentModelEntity1.phoneno = participentData.value(forKey: "phoneno") as? String
+
+        do {
+            try self.managedObjectContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
 }

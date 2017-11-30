@@ -2,7 +2,7 @@
 //  Participants+CoreDataProperties.swift
 //  DigitalWaiver
 //
-//  Created by Kabir Chandoke on 11/27/17.
+//  Created by Kabir Chandoke on 11/30/17.
 //  Copyright © 2017 Abhishek. All rights reserved.
 //
 //
