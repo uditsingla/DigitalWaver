@@ -95,6 +95,9 @@ class BaseWebAccessLayer: NSObject {
         {
             SVProgressHUD.showError(withStatus: "No Internet Available")
             SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
+            let resJson = NSDictionary()
+
+            result(resJson , 0)
 
         }
         

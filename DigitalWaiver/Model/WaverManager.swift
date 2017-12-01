@@ -218,8 +218,15 @@ class WaverManager: NSObject {
 
     func SaveGroupDataInDB (groupData:NSDictionary) {
         let predicate = NSPredicate(format: "groupname==%@", groupData.value(forKey: "group_name") as! CVarArg)
-        self.removeIfDataExistForProfileId(dataID: String(describing: groupData.value(forKey: "group_name")), withPredicate: predicate, forEntityName: "Groups")
         
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Groups")
+        fetchRequest.predicate = predicate
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        if ((resultData?.count)! == 0) {
+            
         print("groupData == \(groupData)")
         // Create Entity Description
         let entityDescription = NSEntityDescription.entity(forEntityName: "Groups", in: self.managedObjectContext)
@@ -236,10 +243,34 @@ class WaverManager: NSObject {
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+    
         self.groupModelEntity = groupModelEntity1
-
+        }
     }
     
+    func UpdateGroupDataInDB (groupDict:NSDictionary) {
+        
+        let predicate = NSPredicate(format: "groupname==%@", groupDict.value(forKey: "group_name") as! CVarArg)
+
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Groups")
+        fetchRequest.predicate = predicate
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        if ((resultData?.count)! > 0) {
+            for object in resultData! {
+                let participentModelEntity1 = object as! Groups
+                participentModelEntity1.issynched = true
+                
+            }
+            do {
+                try self.managedObjectContext.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+    }
+
     //******************************************************************************************************************************************
     // MARK: remove data if exists in Coredata
     
@@ -282,7 +313,13 @@ class WaverManager: NSObject {
         participentModelEntity1.groupname = participentData.value(forKey: "groupname") as? String
         participentModelEntity1.mimetype = participentData.value(forKey: "mimetype") as? String
         participentModelEntity1.name = participentData.value(forKey: "name") as? String
-        participentModelEntity1.newsletter = (participentData.value(forKey: "newsletter") as? Bool)!
+        if participentData.value(forKey: "newsletter") as! String == "true" {
+            participentModelEntity1.newsletter = true
+        }
+        else {
+            participentModelEntity1.newsletter = false
+        }
+//        participentModelEntity1.newsletter = participentData.value(forKey: "newsletter")! as! Bool
         participentModelEntity1.participantsNo = participentData.value(forKey: "participants_no") as? String
         participentModelEntity1.phoneno = participentData.value(forKey: "phoneno") as? String
 
@@ -294,4 +331,28 @@ class WaverManager: NSObject {
         
     }
     
+    func UpdateParticipentDataInDB (participentData:NSDictionary) {
+        
+        let predicate1:NSPredicate = NSPredicate(format: "groupname==%@", participentData.value(forKey: "groupname") as! CVarArg)
+        let predicate2:NSPredicate = NSPredicate(format: "name==%@", participentData.value(forKey: "name") as! CVarArg)
+        let predicate:NSPredicate  = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1,predicate2] )
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Participants")
+        fetchRequest.predicate = predicate
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        if ((resultData?.count)! > 0) {
+            for object in resultData! {
+                let participentModelEntity1 = object as! Participants
+                participentModelEntity1.issynched = true
+
+            }
+            do {
+                try self.managedObjectContext.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+    }
 }

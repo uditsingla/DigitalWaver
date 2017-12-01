@@ -126,13 +126,15 @@ class WaverVC: UIViewController,UITextFieldDelegate {
         UserDefaults.standard.set(dict, forKey: "dictWaversData")
         UserDefaults.standard.synchronize()
         
+        ModelManager.sharedInstance.waverManager.SaveGroupDataInDB(groupData: dictData as NSDictionary)
+
         //APiHit
         let reach = Reachability()
         if let reachable : String = reach?.currentReachabilityString
         {
             if(reachable != "No Connection")
             {
-                self.addParticiant(dictData: dict)
+                self.addParticiant(dictData: dict,savedData: dictData as NSDictionary)
             }
             else
             {
@@ -141,11 +143,10 @@ class WaverVC: UIViewController,UITextFieldDelegate {
             }
         }
         
-        ModelManager.sharedInstance.waverManager.SaveGroupDataInDB(groupData: dictData as NSDictionary)
 
     }
     
-    func addParticiant(dictData : [String : Any])
+    func addParticiant(dictData : [String : Any],savedData:NSDictionary)
     {
         SVProgressHUD.show(withStatus: "Loading.....")
         ModelManager.sharedInstance.waverManager.addWaver(userInfo: dictData, handler: { (isSuccess, strMessage) in
@@ -153,6 +154,7 @@ class WaverVC: UIViewController,UITextFieldDelegate {
             
             if(isSuccess)
             {
+                ModelManager.sharedInstance.waverManager.UpdateGroupDataInDB(groupDict: savedData)
                 print(strMessage)
                 SVProgressHUD.showSuccess(withStatus: strMessage)
                 SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)

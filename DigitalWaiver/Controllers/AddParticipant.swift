@@ -650,9 +650,14 @@ extension AddParticipant: ParticipentView {
     }
     
     func finishLoadingWithSuccess() {
-        
+        SVProgressHUD.dismiss()
+
     }
     
+    func finishLoadingOnSuccess(withDict:NSDictionary) {
+        ModelManager.sharedInstance.waverManager.UpdateParticipentDataInDB(participentData: withDict)
+
+    }
     
     func showError(withStatus: String) {
         SVProgressHUD.showInfo(withStatus: withStatus)
