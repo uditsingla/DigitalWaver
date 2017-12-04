@@ -361,7 +361,7 @@ class WaverManager: NSObject {
         else {
             participentModelEntity1.newsletter = false
         }
-//        participentModelEntity1.newsletter = participentData.value(forKey: "newsletter")! as! Bool
+
         participentModelEntity1.participantsNo = participentData.value(forKey: "participants_no") as? String
         participentModelEntity1.phoneno = participentData.value(forKey: "phoneno") as? String
 
@@ -447,6 +447,7 @@ class WaverManager: NSObject {
                 waverObj.name = participantEntity.name
                 waverObj.email = participantEntity.email
                 waverObj.phoneNo = participantEntity.phoneno
+                waverObj.signaturefileContent = participantEntity.filecontent
                 arrData.add(waverObj)
             }
             return arrData
@@ -473,7 +474,7 @@ class WaverManager: NSObject {
                 let groupEntity = object as! Groups
                 let groupObj = GroupI()
                 groupObj.groupName = groupEntity.groupname
-                groupObj.businessname = groupEntity.participantsno
+                groupObj.businessname = groupEntity.buisness
                 groupObj.link = groupEntity.waverlink
                 groupObj.participantNo = groupEntity.participantsno
                 if(groupEntity.issynched)

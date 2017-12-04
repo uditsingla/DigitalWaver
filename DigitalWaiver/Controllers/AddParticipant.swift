@@ -17,6 +17,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     fileprivate let participentPresenter = ParticipentPresenter()
 
+    @IBOutlet weak var viewSuperImage: UIView!
     // Connect this Outlet to the Signature View
     @IBOutlet weak var signatureView: YPDrawSignatureView!
 
@@ -46,6 +47,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     @IBOutlet weak var viewSuperSignature: UIView!
     
+    @IBOutlet weak var imgSignature: UIImageView!
     var gender = "Select"
     
     var isNewsletterSubscribe = true
@@ -90,17 +92,11 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         // Getting the Signature Image from self.drawSignatureView using the method getSignature().
         if let signatureImage = self.signatureView.getSignature(scale: 1) {
             
-            // Saving signatureImage from the line above to the Photo Roll.
-            // The first time you do this, the app asks for access to your pictures.
-            //UIImageWriteToSavedPhotosAlbum(signatureImage, nil, nil, nil)
-            
-            
+        
             let imageData = UIImageJPEGRepresentation(signatureImage, 0.5)
             
             self.sendFinalImage = (imageData?.base64EncodedString(options: .endLineWithLineFeed))!
             
-            debugPrint(self.sendFinalImage)
-
             var dictData = [String : Any]()
             
             let userDefault = UserDefaults.standard
@@ -237,6 +233,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @IBAction func actionCross(_ sender: UIButton) {
         viewWeb.isHidden = true
+        
+        viewSuperImage.isHidden = true
         
 //        if let url = URL(string: "about:blank") {
 //            let request = URLRequest(url: url)
@@ -423,23 +421,42 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBAction func actionViewSignature(_ sender: UIButton) {
         
         print("view sign")
+        
+//        if let decodedData = Data(base64Encoded: mediaFile, options: .ignoreUnknownCharacters) {
+//            let image = UIImage(data: decodedData)
+//        }
 
         let buttonPosition = sender.convert(CGPoint.zero, to: self.tblParticipants)
         let indexPath = self.tblParticipants.indexPathForRow(at:buttonPosition)
         if let indexPath = indexPath?.row
         {
             print(indexPath)
-            viewWeb.isHidden = false
             
             
             let urlStr = "\(Constants.baseUrl)getsignature?signature_url=\(((arrParticipants.object(at: indexPath) as? WaverI)?.signature)!)&mimetype=\(((arrParticipants.object(at: indexPath) as? WaverI)?.mimeType)!)"
             
             print(urlStr)
             
+            if(((arrParticipants.object(at: indexPath) as? WaverI)?.signature)! == "")
+            {
+                
+                if let decodedData = Data(base64Encoded: ((arrParticipants.object(at: indexPath) as? WaverI)?.signaturefileContent)!, options: .ignoreUnknownCharacters)
+                {
+                    let image = UIImage(data: decodedData)
+                    imgSignature.image = image
+                    viewSuperImage.isHidden = false
+                    return
+                    
+                }
+            }
+            
+            viewWeb.isHidden = false
+
             if let url = URL(string: urlStr) {
                 let request = URLRequest(url: url)
                 viewWebView.loadRequest(request)
             }
+            
         }
         
         webViewHeightContraints.constant = 0

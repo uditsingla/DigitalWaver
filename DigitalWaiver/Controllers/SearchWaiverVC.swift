@@ -94,20 +94,25 @@ class SearchWaiverVC: UIViewController {
                     
                     ModelManager.sharedInstance.waverManager.searchWaiver(searchString: criteria, handler: { (isSuccess, strMessage, arrResponse) in
                        
-                        let arr = arrResponse
-                        var results = [SearchTextFieldItem]()
-                        
-                        for item in arr!{
-                            results.append(SearchTextFieldItem(title: "\(item)"))
-                        }
-                        
-                        // Set new items to filter
-                        DispatchQueue.main.async {
+                        if(isSuccess)
+                        {
+                            let arr = arrResponse
+                            var results = [SearchTextFieldItem]()
                             
-                            self.txtSearch.filterItems(results)
-                            // Stop loading indicator
-                            self.txtSearch.stopLoadingIndicator()
+                            for item in arr!{
+                                results.append(SearchTextFieldItem(title: "\(item)"))
+                            }
+                            
+                            // Set new items to filter
+                            DispatchQueue.main.async {
+                                
+                                self.txtSearch.filterItems(results)
+                                // Stop loading indicator
+                            }
                         }
+                        
+                        self.txtSearch.stopLoadingIndicator()
+
                     })
                     
                
@@ -165,8 +170,9 @@ class SearchWaiverVC: UIViewController {
                     dictGroupInfo["link"] = group.link
                     dictGroupInfo["participants_no"] = group.participantNo
                     dictGroupInfo["group_name"] = group.groupName
-                    dictGroupInfo["isNewGroup"] = "true"
+                    dictGroupInfo["isNewGroup"] = group.isNewGroup
                     
+                    print(dictGroupInfo)
                     
                     if let arrParticpants =  ModelManager.sharedInstance.waverManager.getallOfflineparticipants(groupName: group.groupName!)
                     {
@@ -191,6 +197,8 @@ class SearchWaiverVC: UIViewController {
                                 dictParticipantsInfo["filecontent"] = participant.signaturefileContent
                                 dictParticipantsInfo["filename"] = "signature.jpg"
                                 arrGroupParicipants.append(dictParticipantsInfo)
+                                
+                                print(dictParticipantsInfo)
                             }
                             dictGroupInfo["GroupParticipantsInfo"] = arrGroupParicipants
                         }
@@ -215,7 +223,7 @@ class SearchWaiverVC: UIViewController {
 
                 if(isSuccess)
                 {
-                    print("Data synched Successfully, remove DB")
+                    print("Data synched Successfully, DB Clear")
                     ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
                     
                 }

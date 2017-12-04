@@ -903,6 +903,39 @@
                                     <constraint firstAttribute="trailing" secondItem="akv-Fg-BzI" secondAttribute="trailing" constant="34" id="sjK-1f-bf5"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHS-50-wuz">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ob2-sp-0sg">
+                                        <rect key="frame" x="34" y="162" width="700" height="700"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="700" id="KXM-Yi-B8m"/>
+                                            <constraint firstAttribute="height" constant="700" id="w37-RD-Ewu"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFg-kc-XHl">
+                                        <rect key="frame" x="659" y="50" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="A7o-C8-qPb"/>
+                                            <constraint firstAttribute="height" constant="100" id="znS-SQ-54g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                        <state key="normal" title="X">
+                                            <color key="titleColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionCross:" destination="Ho9-Ar-3pU" eventType="touchUpInside" id="UkL-Fo-wRT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ob2-sp-0sg" firstAttribute="centerX" secondItem="mHS-50-wuz" secondAttribute="centerX" id="Egd-2W-jpn"/>
+                                    <constraint firstItem="ob2-sp-0sg" firstAttribute="centerY" secondItem="mHS-50-wuz" secondAttribute="centerY" id="NUS-jB-JVZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="jFg-kc-XHl" secondAttribute="trailing" constant="9" id="cfz-JS-lTP"/>
+                                    <constraint firstItem="jFg-kc-XHl" firstAttribute="top" secondItem="mHS-50-wuz" secondAttribute="top" constant="50" id="gLu-VP-E9X"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -914,9 +947,12 @@
                             <constraint firstItem="190-aK-XM5" firstAttribute="bottom" secondItem="bMp-y7-QSI" secondAttribute="bottom" id="6Q1-G0-mF1"/>
                             <constraint firstItem="G2k-Pw-8Pu" firstAttribute="top" secondItem="190-aK-XM5" secondAttribute="top" id="7Ev-jJ-WYL"/>
                             <constraint firstItem="190-aK-XM5" firstAttribute="trailing" secondItem="bMp-y7-QSI" secondAttribute="trailing" id="FZL-Fl-4t8"/>
+                            <constraint firstItem="mHS-50-wuz" firstAttribute="trailing" secondItem="190-aK-XM5" secondAttribute="trailing" id="M6t-q1-CMT"/>
                             <constraint firstItem="IMY-Du-Maq" firstAttribute="centerX" secondItem="haS-yh-YGJ" secondAttribute="centerX" id="N7H-oq-ICO"/>
+                            <constraint firstItem="mHS-50-wuz" firstAttribute="top" secondItem="haS-yh-YGJ" secondAttribute="top" id="NCB-pT-PAX"/>
                             <constraint firstItem="91D-FA-jzk" firstAttribute="leading" secondItem="190-aK-XM5" secondAttribute="leading" id="Ocj-Bb-SaM"/>
                             <constraint firstItem="bMp-y7-QSI" firstAttribute="leading" secondItem="190-aK-XM5" secondAttribute="leading" id="RTN-Jz-VdS"/>
+                            <constraint firstItem="mHS-50-wuz" firstAttribute="bottom" secondItem="190-aK-XM5" secondAttribute="bottom" id="Wov-QD-GJm"/>
                             <constraint firstItem="91D-FA-jzk" firstAttribute="top" secondItem="IMY-Du-Maq" secondAttribute="bottom" id="dZN-FZ-hok"/>
                             <constraint firstItem="G2k-Pw-8Pu" firstAttribute="leading" secondItem="190-aK-XM5" secondAttribute="leading" id="fQc-20-96v"/>
                             <constraint firstItem="190-aK-XM5" firstAttribute="trailing" secondItem="G2k-Pw-8Pu" secondAttribute="trailing" id="gIR-E5-rHg"/>
@@ -924,6 +960,7 @@
                             <constraint firstItem="91D-FA-jzk" firstAttribute="trailing" secondItem="190-aK-XM5" secondAttribute="trailing" id="ita-DM-Xgd"/>
                             <constraint firstItem="bKE-4r-gIo" firstAttribute="centerX" secondItem="haS-yh-YGJ" secondAttribute="centerX" id="m0x-7P-Hmh"/>
                             <constraint firstItem="91D-FA-jzk" firstAttribute="bottom" secondItem="190-aK-XM5" secondAttribute="bottom" id="unU-jk-n08"/>
+                            <constraint firstItem="mHS-50-wuz" firstAttribute="leading" secondItem="190-aK-XM5" secondAttribute="leading" id="xMY-av-jEk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="190-aK-XM5"/>
                     </view>
@@ -933,6 +970,7 @@
                         <outlet property="btnSignMinor" destination="aQN-Xb-h7w" id="iJu-r0-Px6"/>
                         <outlet property="btnSubscription" destination="acG-VZ-aiC" id="ph2-Pf-hea"/>
                         <outlet property="btnUpdateParticipants" destination="h7k-sP-tGq" id="lOc-Gz-Zcl"/>
+                        <outlet property="imgSignature" destination="ob2-sp-0sg" id="Tvm-ip-7Xs"/>
                         <outlet property="pickerGender" destination="DDh-4n-wsR" id="P5E-Iw-0gG"/>
                         <outlet property="signatureView" destination="akv-Fg-BzI" id="zcc-Lh-69B"/>
                         <outlet property="superOfInnerViewHeightConstraint" destination="cTI-BR-IS1" id="8BM-60-p5u"/>
@@ -945,6 +983,7 @@
                         <outlet property="txtNoOfParticipants" destination="hHD-K4-z0l" id="Cvl-Oy-nAQ"/>
                         <outlet property="txtPhone" destination="T89-Qc-wtR" id="5d5-IJ-DWh"/>
                         <outlet property="viewSuperGender" destination="TLD-v0-HyD" id="kz0-rn-ASd"/>
+                        <outlet property="viewSuperImage" destination="mHS-50-wuz" id="Ybl-Bw-18O"/>
                         <outlet property="viewSuperSignature" destination="G2k-Pw-8Pu" id="DS1-BD-0yL"/>
                         <outlet property="viewSuperSubviews" destination="jPm-Yp-sfV" id="rCA-Cs-hqX"/>
                         <outlet property="viewWeb" destination="bMp-y7-QSI" id="G3H-Sv-md4"/>
