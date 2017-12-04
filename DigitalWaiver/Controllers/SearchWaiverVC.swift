@@ -225,7 +225,6 @@ class SearchWaiverVC: UIViewController {
                 {
                     print("Data synched Successfully, DB Clear")
                     ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
-                    
                 }
                 else
                 {
