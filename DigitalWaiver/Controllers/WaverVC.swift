@@ -101,16 +101,21 @@ class WaverVC: UIViewController,UITextFieldDelegate {
     {
         let dictWaiver = (UserDefaults.standard.object(forKey: "dictWaversData") as! [String : Any])
         
-        var dictData = [String : String]()
+        var dictData = [String : Any]()
         dictData["businessname"] = UserDefaults.standard.string(forKey: "buisnessName")
         dictData["participants_no"] = "\(particiantNo)"
         dictData["group_name"] = txtGroupName.text
-        
+        dictData["isSynched"] = false
+
         if let a = dictData["businessname"]
         {
+            let srtA = a as! String
+            
             if let b = dictData["group_name"]
             {
-                dictData["link"] = "http://digital-waiver.appspot.com/viewwaiverform.html?businessname="+a+"&groupname="+b
+                let srtB = b as! String
+
+                dictData["link"] = "http://digital-waiver.appspot.com/viewwaiverform.html?businessname="+srtA+"&groupname="+srtB
             }
         }
         
@@ -138,8 +143,13 @@ class WaverVC: UIViewController,UITextFieldDelegate {
             }
             else
             {
-                self.txtGroupName.text = ""
-                self.txtParticipantsNo.text = ""
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "AddParticipant") as! AddParticipant
+                vc.strGroupName = self.txtGroupName.text!
+                vc.particiantNoChanged = particiantNo
+                vc.particiantNo = particiantNo
+                vc.isWaverSelected = false
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
         

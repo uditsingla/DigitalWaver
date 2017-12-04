@@ -120,6 +120,9 @@ class AuthManager: NSObject {
         let appDomain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
         
+        //Reset DB
+        ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
+        
         self.setUserDefaultValues()
     }
     

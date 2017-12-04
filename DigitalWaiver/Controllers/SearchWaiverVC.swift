@@ -8,13 +8,17 @@
 
 import UIKit
 import SearchTextField
-
+import SVProgressHUD
+import ReachabilitySwift
 
 class SearchWaiverVC: UIViewController {
 
     @IBOutlet weak var btnBacktoLogin: RoundedButton!
     @IBOutlet weak var txtSearch: SearchTextField!
-    
+    @IBOutlet weak var btnSynch: RoundedButton!
+        
+    var isSettingClicked = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -115,12 +119,138 @@ class SearchWaiverVC: UIViewController {
     // MARK: - Actions
     @objc func actionSettings()
     {
-        btnBacktoLogin.isHidden = false
+        if(isSettingClicked == true)
+        {
+            isSettingClicked = false
+            btnSynch.isHidden = true
+            btnBacktoLogin.isHidden = true
+        }
+        else
+        {
+            isSettingClicked = true
+            btnSynch.isHidden = false
+            btnBacktoLogin.isHidden = false
+        }
     }
     
     @IBAction func actionBackToLogin(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func actionSynch(_ sender: Any) {
+        
+        setDataToBesynchronise()
+        
+    }
+    
+    func setDataToBesynchronise() {
+        
+        var dictData = [String : Any]()
+        var groupInfo = [String : Any]()
+
+        var arrGroupInfo = [[String : Any]]()
+
+        //Get Offline saved Data From DB
+        if let arrayGroups = ModelManager.sharedInstance.waverManager.getAllGroups()
+        {
+            print(arrayGroups)
+            if(arrayGroups.count > 0)
+            {
+                for groupObj in arrayGroups
+                {
+                    let group = groupObj as! GroupI
+                    
+                    var dictGroupInfo = [String : Any]()
+                    dictGroupInfo["businessname"] = group.businessname
+                    dictGroupInfo["link"] = group.link
+                    dictGroupInfo["participants_no"] = group.participantNo
+                    dictGroupInfo["group_name"] = group.groupName
+                    dictGroupInfo["isNewGroup"] = "true"
+                    
+                    
+                    if let arrParticpants =  ModelManager.sharedInstance.waverManager.getallOfflineparticipants(groupName: group.groupName!)
+                    {
+                        if(arrParticpants.count > 0)
+                        {
+                            var arrGroupParicipants = [[String : Any]]()
+                            
+                            for participantObj in arrParticpants
+                            {
+                                let participant = participantObj as! WaverI
+                                //For loop as of No. particiapnts in a group
+                                var dictParticipantsInfo = [String : Any]()
+                                dictParticipantsInfo["newsletter"] = participant.isNewsletterSubscribe
+                                dictParticipantsInfo["age"] = participant.age
+                                dictParticipantsInfo["gender"] = participant.gender
+                                dictParticipantsInfo["businessname"] = group.businessname
+                                dictParticipantsInfo["mimetype"] = "image/jpeg"
+                                dictParticipantsInfo["groupname"] = group.groupName
+                                dictParticipantsInfo["name"] = participant.name
+                                dictParticipantsInfo["email"] = participant.email
+                                dictParticipantsInfo["phoneno"] = participant.phoneNo
+                                dictParticipantsInfo["filecontent"] = participant.signaturefileContent
+                                dictParticipantsInfo["filename"] = "signature.jpg"
+                                arrGroupParicipants.append(dictParticipantsInfo)
+                            }
+                            dictGroupInfo["GroupParticipantsInfo"] = arrGroupParicipants
+                        }
+                    }
+                    arrGroupInfo.append(dictGroupInfo)
+                }
+            }
+            
+        }
+        
+        groupInfo["groupInfo"] = arrGroupInfo
+        dictData["data"] = groupInfo
+        
+        print(dictData)
+        
+        if(isNetAvailable())
+        {
+            SVProgressHUD.show(withStatus: "Synching")
+            ModelManager.sharedInstance.waverManager.synchDataOnServer(synchData: dictData) { (isSuccess, strMsg) in
+                
+                SVProgressHUD.dismiss()
+
+                if(isSuccess)
+                {
+                    print("Data synched Successfully, remove DB")
+                    ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
+                    
+                }
+                else
+                {
+                    SVProgressHUD.show(withStatus: strMsg)
+                    SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
+                }
+            }
+        }
+        else
+        {
+            SVProgressHUD.showError(withStatus: "Please connect with internet")
+            SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
+        }
+    }
+    
+
+    
+    
+    // MARK: - Internet Available
+    func isNetAvailable() -> Bool {
+        let reach = Reachability()
+        if let reachable : String = reach?.currentReachabilityString
+        {
+            if(reachable != "No Connection")
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+
+    
     
     /*
     // MARK: - Navigation

@@ -20,7 +20,8 @@ class WaverI : NSObject {
     public var emailStatus: String?
     public var gender: String?
     public var age: String?
-
+    public var isNewsletterSubscribe : Bool?
+    public var signaturefileContent : String?
 
     
     override init() {
@@ -34,6 +35,8 @@ class WaverI : NSObject {
         self.emailStatus = ""
         self.gender = ""
         self.age = ""
+        self.isNewsletterSubscribe = true
+        self.signaturefileContent = ""
     }
     
     func resetData()
@@ -47,6 +50,8 @@ class WaverI : NSObject {
         self.emailStatus = ""
         self.gender = ""
         self.age = ""
+        self.isNewsletterSubscribe = true
+        self.signaturefileContent = ""
 
     }
    

@@ -215,6 +215,35 @@ class WaverManager: NSObject {
             }
         }
     }
+    
+    func synchDataOnServer(synchData: [String : Any], handler : @escaping (Bool , String) -> Void){
+        BaseWebAccessLayer.requestURLWithDictionaryResponse(requestType: .post, strURL: "waiverparticipantsync", headers: true, params: synchData, result:
+            {
+                (jsonDict,statusCode) in
+                
+                // success code
+                if(statusCode == 200)
+                {
+                    let isSuccess = jsonDict.value(forKey: "success") as! Bool
+                    
+                    if(isSuccess)
+                    {
+                        handler(true, (jsonDict.value(forKey: "message") as? String)!)
+                    }
+                    else
+                    {
+                        handler(false,(jsonDict.value(forKey: "message") as? String)!)
+                    }
+                }
+                else
+                {
+                    handler(false,(jsonDict.value(forKey: "message") as? String)!)
+                }
+                
+        })
+    }
+
+    // MARK: Coredata Methods
 
     func SaveGroupDataInDB (groupData:NSDictionary) {
         let predicate = NSPredicate(format: "groupname==%@", groupData.value(forKey: "group_name") as! CVarArg)
@@ -236,7 +265,7 @@ class WaverManager: NSObject {
         groupModelEntity1.groupname = groupData.value(forKey: "group_name") as? String
         groupModelEntity1.waverlink = groupData.value(forKey: "link") as? String
         groupModelEntity1.participantsno = groupData.value(forKey: "participants_no") as? String
-        groupModelEntity1.issynched = false
+        groupModelEntity1.issynched = groupData.value(forKey: "isSynched") as! Bool
 
         do {
             try self.managedObjectContext.save()
@@ -274,6 +303,21 @@ class WaverManager: NSObject {
     //******************************************************************************************************************************************
     // MARK: remove data if exists in Coredata
     
+    
+    func deleteAllDataFromDB()
+    {
+        for entityName in ["Groups","Participants"]{
+            let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+            do {
+                try self.managedObjectContext.execute(deleteRequest)
+                try self.managedObjectContext.save()
+            } catch {
+                print ("There was an error")
+            }
+        }
+    }
+    
     func removeIfDataExistForProfileId (dataID: String, withPredicate: NSPredicate, forEntityName: String) {
         print("removeIfDataExistForProfileId")
         
@@ -295,9 +339,7 @@ class WaverManager: NSObject {
     }
     
     func SaveParticipentDataInDB (participentData:NSDictionary) {
-//        let predicate = NSPredicate(format: "groupname==%@", participentData.value(forKey: "group_name") as! CVarArg)
-//        self.removeIfDataExistForProfileId(dataID: String(describing: participentData.value(forKey: "group_name")), withPredicate: predicate, forEntityName: "Groups")
-//
+
         print("participentData == \(participentData)")
         // Create Entity Description
         let entityDescription = NSEntityDescription.entity(forEntityName: "Participants", in: self.managedObjectContext)
@@ -331,7 +373,7 @@ class WaverManager: NSObject {
         
     }
     
-    func UpdateParticipentDataInDB (participentData:NSDictionary) {
+    func UpdateParticipentDataInDB(participentData:NSDictionary) {
         
         let predicate1:NSPredicate = NSPredicate(format: "groupname==%@", participentData.value(forKey: "groupname") as! CVarArg)
         let predicate2:NSPredicate = NSPredicate(format: "name==%@", participentData.value(forKey: "name") as! CVarArg)
@@ -355,4 +397,139 @@ class WaverManager: NSObject {
             }
         }
     }
+    
+    
+    //Update Participants Count Only
+    func updateParticipantsCountInDb(participentData:NSDictionary) -> Bool {
+        let predicate : NSPredicate = NSPredicate(format: "groupname==%@", participentData.value(forKey: "group_name") as! String)
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Groups")
+        fetchRequest.predicate = predicate
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        if ((resultData?.count)! > 0) {
+            for object in resultData! {
+                let groupEntity = object as! Groups
+                groupEntity.participantsno = participentData.value(forKey: "participants_no") as? String
+            }
+            do {
+                try self.managedObjectContext.save()
+                return true
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+                return false
+            }
+        }
+        return false
+    }
+    
+    //get Records from DB
+    func getallparticipants(groupName : String) -> NSMutableArray?
+    {
+        let predicate : NSPredicate = NSPredicate(format: "groupname == %@", groupName)
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Participants")
+        fetchRequest.predicate = predicate
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        if ((resultData?.count)! > 0)
+        {
+            let arrData : NSMutableArray = NSMutableArray()
+
+            //print(resultData)
+            for object in resultData! {
+                
+                let participantEntity = object as! Participants
+                let waverObj = WaverI()
+                waverObj.gender = participantEntity.gender
+                waverObj.age = participantEntity.age
+                waverObj.name = participantEntity.name
+                waverObj.email = participantEntity.email
+                waverObj.phoneNo = participantEntity.phoneno
+                arrData.add(waverObj)
+            }
+            return arrData
+        }
+        return nil
+    }
+    
+    
+    //Get all Offline Groups from DB
+    func getAllGroups() -> NSMutableArray?
+    {   
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Groups")
+//        let predicate : NSPredicate = NSPredicate(format: "issynched == false")
+//        fetchRequest.predicate = predicate
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        if ((resultData?.count)! > 0)
+        {
+            let arrData : NSMutableArray = NSMutableArray()
+            
+            //print(resultData)
+            for object in resultData! {
+                let groupEntity = object as! Groups
+                let groupObj = GroupI()
+                groupObj.groupName = groupEntity.groupname
+                groupObj.businessname = groupEntity.participantsno
+                groupObj.link = groupEntity.waverlink
+                groupObj.participantNo = groupEntity.participantsno
+                if(groupEntity.issynched)
+                {
+                    groupObj.isNewGroup = false
+                }
+                else
+                {
+                    groupObj.isNewGroup = true
+
+                }
+                arrData.add(groupObj)
+            }
+            return arrData
+        }
+        return nil
+    }
+    
+    //Get all Offline Participants
+    func getallOfflineparticipants(groupName : String) -> NSMutableArray?
+    {
+        
+        let predicate1 : NSPredicate = NSPredicate(format: "groupname == %@", groupName)
+        let predicate2 : NSPredicate = NSPredicate(format: "issynched == false")
+        let predicate:NSPredicate  = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1,predicate2] )
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Participants")
+        fetchRequest.predicate = predicate
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        if ((resultData?.count)! > 0)
+        {
+            let arrData : NSMutableArray = NSMutableArray()
+            
+            //print(resultData)
+            for object in resultData! {
+                
+                let participantEntity = object as! Participants
+                let waverObj = WaverI()
+                waverObj.gender = participantEntity.gender
+                waverObj.age = participantEntity.age
+                waverObj.name = participantEntity.name
+                waverObj.email = participantEntity.email
+                waverObj.phoneNo = participantEntity.phoneno
+                waverObj.signaturefileContent = participantEntity.filecontent
+                waverObj.isNewsletterSubscribe = participantEntity.newsletter
+                
+                arrData.add(waverObj)
+            }
+            return arrData
+        }
+        return nil
+    }
+    
+    
+    
+    
 }

@@ -9,6 +9,7 @@
 import UIKit
 //import EPSignature
 import SVProgressHUD
+import ReachabilitySwift
 
 
 
@@ -19,6 +20,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     // Connect this Outlet to the Signature View
     @IBOutlet weak var signatureView: YPDrawSignatureView!
 
+    @IBOutlet weak var webViewHeightContraints: NSLayoutConstraint!
     @IBOutlet weak var btnSubscription: UIButton!
     
     @IBOutlet weak var xConstarintOfClickToSign: NSLayoutConstraint!
@@ -58,7 +60,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     var particiantNoChanged : Int64 = 0
     
-    var groupName : String = ""
+    //var groupName : String = ""
     
     var pickerData: [String] = [String]()
 
@@ -103,7 +105,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             let userDefault = UserDefaults.standard
             dictData["businessname"] = userDefault.string(forKey: "buisnessName")
-            dictData["groupname"] = groupName
+            dictData["groupname"] = strGroupName
             dictData["mimetype"] = "image/jpeg"
             dictData["filecontent"] = "\(self.sendFinalImage)"
             dictData["filename"] = "signature.jpg"
@@ -128,19 +130,31 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
             
             print(dictData)
-            
-            
-//            local db
+//          Local db
             ModelManager.sharedInstance.waverManager.SaveParticipentDataInDB(participentData: dictData as NSDictionary)
-//            push
-            DispatchQueue.main.async {
-                self.participentPresenter.attachView(self as ParticipentView)
-                self.participentPresenter.addNewParticipant(participantInfo: dictData)
-                
+            
+            //Get All Records from PATICIPANTS Table
+            arrParticipants.removeAllObjects()
+            
+            if let arrData = ModelManager.sharedInstance.waverManager.getallparticipants(groupName: strGroupName)
+                {
+                    arrParticipants.addObjects(from: arrData as! [Any])
+                    tblParticipants.reloadData()
+                }
+         
+//            API Hit
+            if(isNetAvailable())
+            {
+                DispatchQueue.main.async {
+                    self.participentPresenter.attachView(self as ParticipentView)
+                    self.participentPresenter.addNewParticipant(participantInfo: dictData)
+                }
             }
-            // Since the Signature is now saved to the Photo Roll, the View can be cleared anyway.
 
+            //Signature View can be cleared.
+            self.resetData()
             self.signatureView.clear()
+            self.viewSuperSignature.isHidden = true
         }
     }
     
@@ -190,8 +204,19 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         txtPhone.text = "+1"
         if(isWaverSelected == true)
         {
+            //Save Local Data of Synched Group
+            
             print("Get waiver detail")
+
             getWaiverDetail()
+            
+            //Show WebView Link
+            self.showWebView()
+        }
+        else
+        {
+            txtNoOfParticipants.text = "\(particiantNoChanged)"
+            viewWeb.isHidden = true
         }
         
         viewWebView.delegate = self
@@ -206,7 +231,6 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @IBAction func actionIAgree(_ sender: UIButton) {
         
-        sender.setImage(#imageLiteral(resourceName: "check"), for: .normal)
         viewWeb.isHidden = true
         
     }
@@ -214,6 +238,10 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBAction func actionCross(_ sender: UIButton) {
         viewWeb.isHidden = true
         
+//        if let url = URL(string: "about:blank") {
+//            let request = URLRequest(url: url)
+//            viewWebView.loadRequest(request)
+//        }
         viewWebView.stopLoading()
 
     }
@@ -221,21 +249,37 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @IBAction func actionViewWaiver(_ sender: RoundedButton) {
         
+        if(isNetAvailable())
+        {
+            self.showWebView()
+        }
+        else
+        {
+            SVProgressHUD.showInfo(withStatus: "Please connect with internet")
+            SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
+        }
+    }
+
+    func showWebView()
+    {
         viewWeb.isHidden = false
         
+        webViewHeightContraints.constant = 94
+        
         let userDefault = UserDefaults.standard
-
+        
         let urlStr = "\(Constants.baseUrl)previewwaiver.html?businessname=\(userDefault.string(forKey: "buisnessName")!)&groupname=\(strGroupName)"
         
+        print("Waiver URL : \(urlStr)")
+        
         let urlwithPercentEscapes = urlStr.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-
+        
         print(urlwithPercentEscapes!)
         if let url = URL(string: urlwithPercentEscapes!) {
             let request = URLRequest(url: url)
             viewWebView.loadRequest(request)
         }
     }
-
     
     
     @IBAction func actionUpdateParticipants(_ sender: RoundedButton) {
@@ -244,17 +288,30 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
 
         var dictData = [String : Any]()
         dictData["participants_no"] = "\(particiantNoChanged)"
-        dictData["group_name"] = groupName
+        dictData["group_name"] = strGroupName
         print(dictData)
-        ModelManager.sharedInstance.waverManager.updateParticipant(participantInfo: dictData) { (isSuccess, strMessage) in
-            
+        
+        //Update No of Participants in Local DB
+        if(ModelManager.sharedInstance.waverManager.updateParticipantsCountInDb(participentData: dictData as NSDictionary))
+        {
             self.particiantNo = self.particiantNoChanged
             self.updateUI()
-            
-            SVProgressHUD.showSuccess(withStatus: strMessage)
-            SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
+        }
+        
+        //Hit API
+        if(isNetAvailable())
+        {
+            ModelManager.sharedInstance.waverManager.updateParticipant(participantInfo: dictData) { (isSuccess, strMessage) in
+                
+                SVProgressHUD.showSuccess(withStatus: strMessage)
+                SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
+            }
         }
     }
+    
+
+    
+    
     @IBAction func actionAdd(_ sender: RoundedButton) {
         
         resignAllResponder()
@@ -279,7 +336,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func updateUI() {
-        if((particiantNoChanged != particiantNo) && (isWaverSelected))
+        if(particiantNoChanged != particiantNo)
         {
             btnUpdateParticipants.isHidden = false
             superOfUpdateParticipantsConstraint.constant = 130
@@ -308,7 +365,6 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
             else
             {
-                
                 if(txtName.text == "" || txtName.text == " ")
                 {
                     SVProgressHUD.showError(withStatus: "Please enter name")
@@ -385,6 +441,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
                 viewWebView.loadRequest(request)
             }
         }
+        
+        webViewHeightContraints.constant = 0
     }
     
     
@@ -430,6 +488,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     // MARK: - Custom Functions
 
+    
     func resetData()
     {
         txtName.text = ""
@@ -471,23 +530,53 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             if let dictWaiverInfo = dictWaiverInfo
             {
                 self.txtNoOfParticipants.text = dictWaiverInfo["participantno"] as? String
-            
-            //Set Number of Particapants from Server
+                
+                //Set Number of Particapants from Server
                 self.particiantNo = Int64((dictWaiverInfo["participantno"] as? String)!)!
-                self.groupName = (dictWaiverInfo["groupname"] as? String)!
-            
-            self.particiantNoChanged = self.particiantNo
-            self.updateUI()
-            
-            self.arrParticipants.removeAllObjects()
-            self.arrParticipants.addObjects(from: arrResponse as! [WaverI])
-               
+                self.strGroupName = (dictWaiverInfo["groupname"] as? String)!
+                self.particiantNoChanged = self.particiantNo
+                
+                //save data in local db
+                self.saveExistingGroupinDB()
 
-            self.tblParticipants.reloadData()
+                self.updateUI()
+                
+                
+                self.arrParticipants.removeAllObjects()
+                self.arrParticipants.addObjects(from: arrResponse as! [WaverI])
+                
+                self.tblParticipants.reloadData()
             }
             
         })
     }
+    
+    func saveExistingGroupinDB()
+    {
+        var dictData = [String : Any]()
+        dictData["businessname"] = UserDefaults.standard.string(forKey: "buisnessName")
+        dictData["participants_no"] = "\(particiantNo)"
+        dictData["group_name"] = strGroupName
+        dictData["isSynched"] = true
+
+        
+        if let a = dictData["businessname"]
+        {
+            let srtA = a as! String
+            
+            if let b = dictData["group_name"]
+            {
+                let srtB = b as! String
+                
+                dictData["link"] = "http://digital-waiver.appspot.com/viewwaiverform.html?businessname="+srtA+"&groupname="+srtB
+            }
+        }
+        
+        
+        ModelManager.sharedInstance.waverManager.SaveGroupDataInDB(groupData: dictData as NSDictionary)
+    }
+
+    
 
     
     //MARK: - Webview Delegates
@@ -509,26 +598,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         SVProgressHUD.show()
     }
 
-    
-    
 
-    /*
-    func epSignature(_: EPSignature.EPSignatureViewController, didCancel error: NSError)
-    {
-        print("Cancel")
-    }
-    
-    func epSignature(_: EPSignature.EPSignatureViewController, didSign signatureImage: UIImage, boundingRect: CGRect)
-    {
-     
-    }
- 
- func epSignature(_: EPSignatureViewController, isSubscriptionRequired : Bool)
- {
- isNewsletterSubscribe = isSubscriptionRequired
- }
- 
- */
     
     // MARK: - Signature Delegates
     @IBAction func setSubscription(_ sender: UIButton) {
@@ -547,6 +617,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     
     // MARK: - Local Storage
+    
     func saveDataInLocalDB(dictData : [String : Any])
     {
         let userDefault = UserDefaults.standard
@@ -554,7 +625,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         var dictData = [String : String]()
         dictData["businessname"] = userDefault.string(forKey: "buisnessName")
-        dictData["groupname"] = groupName
+        dictData["groupname"] = strGroupName
         dictData["mimetype"] = "image/jpeg"
         dictData["filecontent"] = "\(self.sendFinalImage)"
         dictData["filename"] = "signature.jpg"
@@ -631,8 +702,22 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         return myTitle
     }
     
+    // MARK: - Internet Available
+    func isNetAvailable() -> Bool {
+        let reach = Reachability()
+        if let reachable : String = reach?.currentReachabilityString
+        {
+            if(reachable != "No Connection")
+            {
+                return true
+            }
+        }
+        return false
+    }
 
 }
+
+// MARK: - Extension
 
 extension AddParticipant: ParticipentView {
     func startLoading() {
