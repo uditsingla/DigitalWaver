@@ -152,8 +152,6 @@ class WaverVC: UIViewController,UITextFieldDelegate {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-        
-
     }
     
     func addParticiant(dictData : [String : Any],savedData:NSDictionary)

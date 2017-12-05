@@ -10,6 +10,14 @@ import UIKit
 import CoreData
 
 class WaverManager: NSObject {
+    
+    var waverHTMLContent : String?
+    
+    override init()
+    {
+        waverHTMLContent  = ""
+    }
+    
     let managedObjectContext = AppSharedInstance.sharedInstance.managedObjectContext
     var groupModelEntity: NSManagedObject? = nil
 
@@ -197,6 +205,10 @@ class WaverManager: NSObject {
                 {
                 let dictData = arrResponse.object(at: 0) as! [String : AnyObject]
                 print(dictData)
+                    
+                //Set Waver Content
+                    ModelManager.sharedInstance.waverManager.waverHTMLContent = dictData["Content"] as? String
+                    
                 let userDefault = UserDefaults.standard
                 userDefault.set(dictData["BusinessName"], forKey: "buisnessName")
                 userDefault.synchronize()

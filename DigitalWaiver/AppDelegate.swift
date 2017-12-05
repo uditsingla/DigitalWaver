@@ -39,44 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
-        let reach = Reachability()
-        
-        if let dictData = UserDefaults.standard.object(forKey: "dictWaversData") as? [String : Any]
-        {
-            if let arrData = dictData["data"]
-            {
-                if let reachable : String = reach?.currentReachabilityString
-                {
-                    if(reachable != "No Connection")
-                    {
-                        if((arrData as! NSArray).count > 0)
-                        {
-                            
-                            ModelManager.sharedInstance.waverManager.addWaver(userInfo: dictData, handler: { (isSuccess, strMessage) in
-                                
-                                if(isSuccess)
-                                {
-                                    if (UserDefaults.standard.object(forKey: "dictWaversData") as? [String : Any]) != nil
-                                    {
-                                        var dictData = [String : Any]()
-                                        let arrMut : NSMutableArray = NSMutableArray()
-                                        dictData["data"] = arrMut
-                                        UserDefaults.standard.set(dictData, forKey: "dictWaversData")
-                                        UserDefaults.standard.synchronize()
-                                    }
-                                }
-                                else
-                                {
-                                    print("unable to save data in app delegate")
-                                }
-                            })
-                        }
-                    }
-                }
-                
-            }
-        }
-
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

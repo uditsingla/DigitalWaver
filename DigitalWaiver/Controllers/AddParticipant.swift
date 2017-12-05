@@ -72,6 +72,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @IBOutlet weak var viewSuperGender: UIView!
     
+    var isGropSynched : Bool?
+    
     // MARK: - Signature View Actions
     
     @IBAction func cancleSignature(_ sender: UIButton) {
@@ -141,10 +143,14 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
 //            API Hit
             if(isNetAvailable())
             {
-                DispatchQueue.main.async {
-                    self.participentPresenter.attachView(self as ParticipentView)
-                    self.participentPresenter.addNewParticipant(participantInfo: dictData)
+                if(isWaverSelected)
+                {
+                    DispatchQueue.main.async {
+                        self.participentPresenter.attachView(self as ParticipentView)
+                        self.participentPresenter.addNewParticipant(participantInfo: dictData)
+                    }
                 }
+
             }
 
             //Signature View can be cleared.
@@ -236,26 +242,17 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         viewSuperImage.isHidden = true
         
-//        if let url = URL(string: "about:blank") {
-//            let request = URLRequest(url: url)
-//            viewWebView.loadRequest(request)
-//        }
+        if let url = URL(string: "about:blank") {
+            let request = URLRequest(url: url)
+            viewWebView.loadRequest(request)
+        }
         viewWebView.stopLoading()
-
     }
     
     
     @IBAction func actionViewWaiver(_ sender: RoundedButton) {
-        
-        if(isNetAvailable())
-        {
+
             self.showWebView()
-        }
-        else
-        {
-            SVProgressHUD.showInfo(withStatus: "Please connect with internet")
-            SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
-        }
     }
 
     func showWebView()
@@ -263,7 +260,10 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         viewWeb.isHidden = false
         
         webViewHeightContraints.constant = 94
-        
+     viewWebView.loadHTMLString(ModelManager.sharedInstance.waverManager.waverHTMLContent!
+            , baseURL: nil)
+
+        /*
         let userDefault = UserDefaults.standard
         
         let urlStr = "\(Constants.baseUrl)previewwaiver.html?businessname=\(userDefault.string(forKey: "buisnessName")!)&groupname=\(strGroupName)"
@@ -273,10 +273,12 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         let urlwithPercentEscapes = urlStr.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         
         print(urlwithPercentEscapes!)
+        
         if let url = URL(string: urlwithPercentEscapes!) {
             let request = URLRequest(url: url)
             viewWebView.loadRequest(request)
         }
+        */
     }
     
     

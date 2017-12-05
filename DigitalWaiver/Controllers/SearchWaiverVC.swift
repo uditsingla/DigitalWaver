@@ -209,6 +209,14 @@ class SearchWaiverVC: UIViewController {
             
         }
         
+        if(arrGroupInfo.count == 0)
+        {
+            SVProgressHUD.showInfo(withStatus: "Data already sync")
+            SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
+            return
+        }
+        
+        
         groupInfo["groupInfo"] = arrGroupInfo
         dictData["data"] = groupInfo
         
@@ -224,6 +232,7 @@ class SearchWaiverVC: UIViewController {
                 if(isSuccess)
                 {
                     print("Data synched Successfully, DB Clear")
+                    arrGroupInfo.removeAll()
                     ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
                 }
                 else
