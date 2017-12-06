@@ -113,6 +113,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             dictData["newsletter"] = "\(isNewsletterSubscribe)"
             dictData["age"] = "\(self.txtAge.text!)"
             dictData["gender"] = "\(gender)"
+            dictData["isSynched"] = false
+
             
             if(btnSignMinor.currentTitle == "Sign Major")
             {
@@ -146,6 +148,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
                 if(isWaverSelected)
                 {
                     DispatchQueue.main.async {
+                        
+                        dictData.removeValue(forKey: "isSynched")
                         self.participentPresenter.attachView(self as ParticipentView)
                         self.participentPresenter.addNewParticipant(participantInfo: dictData)
                     }
@@ -222,6 +226,11 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
         viewWebView.delegate = self
+
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.showWebView()
 
     }
@@ -265,22 +274,6 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
      viewWebView.loadHTMLString(ModelManager.sharedInstance.waverManager.waverHTMLContent!
             , baseURL: nil)
 
-        /*
-        let userDefault = UserDefaults.standard
-        
-        let urlStr = "\(Constants.baseUrl)previewwaiver.html?businessname=\(userDefault.string(forKey: "buisnessName")!)&groupname=\(strGroupName)"
-        
-        print("Waiver URL : \(urlStr)")
-        
-        let urlwithPercentEscapes = urlStr.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-        
-        print(urlwithPercentEscapes!)
-        
-        if let url = URL(string: urlwithPercentEscapes!) {
-            let request = URLRequest(url: url)
-            viewWebView.loadRequest(request)
-        }
-        */
     }
     
     
@@ -304,6 +297,9 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         if(isNetAvailable())
         {
             ModelManager.sharedInstance.waverManager.updateParticipant(participantInfo: dictData) { (isSuccess, strMessage) in
+                
+                self.particiantNo = self.particiantNoChanged
+                self.updateUI()
                 
                 SVProgressHUD.showSuccess(withStatus: strMessage)
                 SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
@@ -578,6 +574,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func saveExistingGroupinDB()
     {
+        
         var dictData = [String : Any]()
         dictData["businessname"] = UserDefaults.standard.string(forKey: "buisnessName")
         dictData["participants_no"] = "\(particiantNo)"
@@ -596,6 +593,10 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
                 dictData["link"] = "http://digital-waiver.appspot.com/viewwaiverform.html?businessname="+srtA+"&groupname="+srtB
             }
         }
+        
+        let isGroupSaved = ModelManager.sharedInstance.waverManager.SaveGroupDataInDB(groupData: dictData as NSDictionary)
+        
+        debugPrint(isGroupSaved)
     }
 
     
@@ -640,32 +641,25 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     // MARK: - Local Storage
     
-    func saveDataInLocalDB(dictData : [String : Any])
-    {
-        let userDefault = UserDefaults.standard
-        let arrMutable = (UserDefaults.standard.object(forKey: "arrayDictData") as! NSArray).mutableCopy() as! NSMutableArray
-        
-        var dictData = [String : String]()
-        dictData["businessname"] = userDefault.string(forKey: "buisnessName")
-        dictData["groupname"] = strGroupName
-        dictData["mimetype"] = "image/jpeg"
-        dictData["filecontent"] = "\(self.sendFinalImage)"
-        dictData["filename"] = "signature.jpg"
-     
-        dictData["name"] = "\(self.txtName.text!)"
-        dictData["newsletter"] = "\(isNewsletterSubscribe)"
-        dictData["age"] = "\(self.txtAge.text!)"
-        dictData["gender"] = "\(gender)"
-        
-        arrMutable.add(dictData)
-        
-        UserDefaults.standard.set(arrMutable, forKey: "arrayDictData")
-        
-        
-        //APiHit
-        self.addParticiant()
-        
-    }
+//    func saveDataInLocalDB(waverObj : WaverI)
+//    {
+//        let userDefault = UserDefaults.standard
+//        let dictData = NSMutableDictionary()
+//        dictData["businessname"] = userDefault.string(forKey: "buisnessName")
+//        dictData["groupname"] = self.strGroupName
+//        dictData["mimetype"] = "image/jpeg"
+//        dictData["filecontent"] = "\(self.sendFinalImage)"
+//        dictData["filename"] = "signature.jpg"
+//        dictData["phoneno"] = "\(self.txtPhone.text!)"
+//        dictData["email"] = "\(waverObj.email!)"
+//        dictData["name"] = "\(waverObj.name)"
+//        dictData["newsletter"] = "\(isNewsletterSubscribe)"
+//        dictData["age"] = "\(waverObj.age)"
+//        dictData["gender"] = "\(waverObj.gender)"
+//        dictData["isSynched"] = true
+//
+       // ModelManager.sharedInstance.waverManager.SaveParticipentDataInDB(participentData: <#T##NSDictionary#>)
+    //}
     
     // MARK: - TableView Delegates
     

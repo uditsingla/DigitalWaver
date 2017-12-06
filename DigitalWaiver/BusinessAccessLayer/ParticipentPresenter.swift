@@ -52,7 +52,6 @@ class ParticipentPresenter: NSObject {
     
     func addNewParticipant(participantInfo:[String : Any]) {
         self.participentView?.startLoading()
-
         ModelManager.sharedInstance.waverManager.addNewParticipant(participantInfo: participantInfo) { (isSuccess, strMessage) in
             self.participentView?.finishLoading()
             if (isSuccess == true) {

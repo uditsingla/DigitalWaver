@@ -131,6 +131,7 @@ class WaverVC: UIViewController,UITextFieldDelegate {
         {
             if(reachable != "No Connection")
             {
+                dictData.removeValue(forKey: "isSynched")
                 self.addParticiant(dictData: dictData,savedData: dictData as NSDictionary)
             }
             else
@@ -154,7 +155,7 @@ class WaverVC: UIViewController,UITextFieldDelegate {
             
             if(isSuccess)
             {
-                ModelManager.sharedInstance.waverManager.UpdateGroupDataInDB(groupDict: savedData)
+            ModelManager.sharedInstance.waverManager.UpdateGroupDataInDB(groupDict: savedData)
                 print(strMessage)
                 SVProgressHUD.showSuccess(withStatus: strMessage)
                 SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)

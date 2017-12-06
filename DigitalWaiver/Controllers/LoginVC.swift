@@ -38,8 +38,7 @@ class LoginVC: UIViewController {
             return
         }
         
-        
-        SVProgressHUD.showError(withStatus: "mssggggggggggg")
+        SVProgressHUD.show(withStatus: "Please Wait...")
 
         DispatchQueue.main.async {
             
