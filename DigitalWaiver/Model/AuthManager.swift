@@ -67,17 +67,23 @@ class AuthManager: NSObject {
                     {
                         print(userInfo)
                         
-                        if((UserDefaults.standard.object(forKey: "userEmail")) != nil)
-                        {
-                            if((UserDefaults.standard.value(forKey: "userEmail") as! String) != (userInfo["email"] as! String))
-                            {
-                                self.resetUserDefaults()
-                            }
-                        }
-                        else
-                        {
-                            UserDefaults.standard.set(userInfo["email"] as! String, forKey: "userEmail")
-                        }
+//                        if((UserDefaults.standard.object(forKey: "userEmail")) != nil)
+//                        {
+//                            if((UserDefaults.standard.value(forKey: "userEmail") as! String) != (userInfo["email"] as! String))
+//                            {
+//                                self.resetUserDefaults()
+//                            }
+//                            else
+//                            {
+//                                ModelManager.sharedInstance.waverManager.setDataToBesynchronise { (isSuccess, strMessage) in
+//
+//                                }
+//                            }
+//                        }
+//                        else
+//                        {
+//                            UserDefaults.standard.set(userInfo["email"] as! String, forKey: "userEmail")
+//                        }
                         
                         handler(nil, true,(jsonDict.value(forKey: "message") as? String)!)
                     }
@@ -96,23 +102,7 @@ class AuthManager: NSObject {
         })
     }
     
-    
-    
-    func setUserDefaultValues()
-    {
-        if (UserDefaults.standard.object(forKey: "dictWaversData") as? [String : Any]) != nil
-        {
 
-        }
-        else
-        {
-            var dictData = [String : Any]()
-            let arrMut : NSMutableArray = NSMutableArray()
-            dictData["data"] = arrMut
-            UserDefaults.standard.set(dictData, forKey: "dictWaversData")
-            UserDefaults.standard.synchronize()
-        }
-    }
     
     
     func resetUserDefaults()
@@ -123,7 +113,6 @@ class AuthManager: NSObject {
         //Reset DB
         ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
         
-        self.setUserDefaultValues()
     }
     
     

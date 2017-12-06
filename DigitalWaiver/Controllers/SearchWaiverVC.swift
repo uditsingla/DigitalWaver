@@ -34,6 +34,10 @@ class SearchWaiverVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        SVProgressHUD.dismiss()
+    }
+    
 
 
     override func didReceiveMemoryWarning() {
@@ -144,126 +148,32 @@ class SearchWaiverVC: UIViewController {
     
     @IBAction func actionSynch(_ sender: Any) {
         
-        setDataToBesynchronise()
+        SVProgressHUD.show(withStatus: "Synching")
         
-    }
-    
-    func setDataToBesynchronise() {
+        ModelManager.sharedInstance.waverManager.setDataToBesynchronise { (isSuccess, strMessage) in
         
-        var dictData = [String : Any]()
-        var groupInfo = [String : Any]()
+            SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
 
-        var arrGroupInfo = [[String : Any]]()
-
-        //Get Offline saved Data From DB
-        if let arrayGroups = ModelManager.sharedInstance.waverManager.getAllGroups()
-        {
-            print(arrayGroups)
-            if(arrayGroups.count > 0)
+            if(isSuccess)
             {
-                for groupObj in arrayGroups
-                {
-                    let group = groupObj as! GroupI
-                    
-                    var dictGroupInfo = [String : Any]()
-                    dictGroupInfo["businessname"] = group.businessname
-                    dictGroupInfo["link"] = group.link
-                    dictGroupInfo["participants_no"] = group.participantNo
-                    dictGroupInfo["group_name"] = group.groupName
-                    dictGroupInfo["isNewGroup"] = group.isNewGroup
-                    
-                    print(dictGroupInfo)
-                    
-                    if let arrParticpants =  ModelManager.sharedInstance.waverManager.getallOfflineparticipants(groupName: group.groupName!)
-                    {
-                        if(arrParticpants.count > 0)
-                        {
-                            var arrGroupParicipants = [[String : Any]]()
-                            
-                            for participantObj in arrParticpants
-                            {
-                                let participant = participantObj as! WaverI
-                                //For loop as of No. particiapnts in a group
-                                var dictParticipantsInfo = [String : Any]()
-                                dictParticipantsInfo["newsletter"] = participant.isNewsletterSubscribe
-                                dictParticipantsInfo["age"] = participant.age
-                                dictParticipantsInfo["gender"] = participant.gender
-                                dictParticipantsInfo["businessname"] = group.businessname
-                                dictParticipantsInfo["mimetype"] = "image/jpeg"
-                                dictParticipantsInfo["groupname"] = group.groupName
-                                dictParticipantsInfo["name"] = participant.name
-                                dictParticipantsInfo["email"] = participant.email
-                                dictParticipantsInfo["phoneno"] = participant.phoneNo
-                                dictParticipantsInfo["filecontent"] = participant.signaturefileContent
-                                dictParticipantsInfo["filename"] = "signature.jpg"
-                                arrGroupParicipants.append(dictParticipantsInfo)
-                                
-                                print(dictParticipantsInfo)
-                            }
-                            dictGroupInfo["GroupParticipantsInfo"] = arrGroupParicipants
-                        }
-                    }
-                    arrGroupInfo.append(dictGroupInfo)
-                }
+                SVProgressHUD.showInfo(withStatus: strMessage)
+            }
+            else{
+                SVProgressHUD.showError(withStatus: strMessage)
             }
             
-        }
-        
-        if(arrGroupInfo.count == 0)
-        {
-            SVProgressHUD.showInfo(withStatus: "Data already sync")
-            SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
-            return
-        }
-        
-        
-        groupInfo["groupInfo"] = arrGroupInfo
-        dictData["data"] = groupInfo
-        
-        print(dictData)
-        
-        if(isNetAvailable())
-        {
-            SVProgressHUD.show(withStatus: "Synching")
-            ModelManager.sharedInstance.waverManager.synchDataOnServer(synchData: dictData) { (isSuccess, strMsg) in
-                
-                SVProgressHUD.dismiss()
-
-                if(isSuccess)
-                {
-                    print("Data synched Successfully, DB Clear")
-                    arrGroupInfo.removeAll()
-                    ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
-                }
-                else
-                {
-                    SVProgressHUD.show(withStatus: strMsg)
-                    SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
-                }
-            }
-        }
-        else
-        {
-            SVProgressHUD.showError(withStatus: "Please connect with internet")
             SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
         }
+        
+        
     }
     
 
     
+
     
-    // MARK: - Internet Available
-    func isNetAvailable() -> Bool {
-        let reach = Reachability()
-        if let reachable : String = reach?.currentReachabilityString
-        {
-            if(reachable != "No Connection")
-            {
-                return true
-            }
-        }
-        return false
-    }
+    
+
     
 
     

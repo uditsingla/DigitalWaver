@@ -52,10 +52,9 @@ class GroupsPresenter: NSObject {
         var  dictData : [String : Any] =  [String : Any]()
         dictData["email"] = email
         dictData["password"] = password
-        self.groupsView?.startLoading()
+        //self.groupsView?.startLoading()
 
         ModelManager.sharedInstance.authManager.userLogin(userInfo: dictData) { (userObj, isSuccess, strMessage) in
-            
             
             if(isSuccess)
             {
@@ -65,9 +64,36 @@ class GroupsPresenter: NSObject {
                     
                     if (isSuccess)
                     {
-                        ModelManager.sharedInstance.authManager.setUserDefaultValues()
-                        self.groupsView?.finishLoading()
-                        self.groupsView?.finishLoadingWithSuccess()
+                        //------
+                        if((UserDefaults.standard.object(forKey: "userEmail")) != nil)
+                        {
+                            if((UserDefaults.standard.value(forKey: "userEmail") as! String) != email)
+                            {
+                                ModelManager.sharedInstance.authManager.resetUserDefaults()
+                                
+                                //self.groupsView?.finishLoading()
+                                self.groupsView?.finishLoadingWithSuccess()
+                            }
+                            else
+                            {
+                                ModelManager.sharedInstance.waverManager.setDataToBesynchronise { (isSuccess, strMessage) in
+                                    
+                                    if(isSuccess)
+                                    {
+                                        //self.groupsView?.finishLoading()
+                                        self.groupsView?.finishLoadingWithSuccess()
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            UserDefaults.standard.set(email, forKey: "userEmail")
+                            //self.groupsView?.finishLoading()
+                            self.groupsView?.finishLoadingWithSuccess()
+                        }
+                        //-------
+
                     }
                     else{
                         self.groupsView?.showError(withStatus: strMessage)
@@ -75,8 +101,7 @@ class GroupsPresenter: NSObject {
 
                     }
                 })
-                //self.performSegue(withIdentifier: "goto_homeview", sender: nil)
-                
+
             }
             else
             {
@@ -87,6 +112,8 @@ class GroupsPresenter: NSObject {
             
         }
     }
+    
+
     
     
     func getRefreshDataWith(completion: @escaping (NSMutableArray) -> Void) {

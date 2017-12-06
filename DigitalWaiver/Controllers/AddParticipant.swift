@@ -222,6 +222,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
         viewWebView.delegate = self
+        self.showWebView()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -350,6 +352,9 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @IBAction func actionAddSignature(_ sender: RoundedButton) {
         
+        self.view.endEditing(true)
+
+        
         if(arrParticipants.count < particiantNo)
         {
             if(btnSignMinor.currentTitle == "Sign Minor")
@@ -423,7 +428,8 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBAction func actionViewSignature(_ sender: UIButton) {
         
         print("view sign")
-        
+        self.view.endEditing(true)
+
 //        if let decodedData = Data(base64Encoded: mediaFile, options: .ignoreUnknownCharacters) {
 //            let image = UIImage(data: decodedData)
 //        }
@@ -590,9 +596,6 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
                 dictData["link"] = "http://digital-waiver.appspot.com/viewwaiverform.html?businessname="+srtA+"&groupname="+srtB
             }
         }
-        
-        
-        ModelManager.sharedInstance.waverManager.SaveGroupDataInDB(groupData: dictData as NSDictionary)
     }
 
     

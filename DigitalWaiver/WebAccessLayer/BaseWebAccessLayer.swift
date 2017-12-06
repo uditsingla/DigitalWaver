@@ -62,8 +62,8 @@ class BaseWebAccessLayer: NSObject {
         {
             // proceed
             
-            SVProgressHUD.setStatus("Logging.....")
-            
+            SVProgressHUD.show(withStatus: "Please Wait...")
+
             var finalStrUrl = String()
             
             finalStrUrl = Constants.baseUrl + strURL
@@ -82,7 +82,7 @@ class BaseWebAccessLayer: NSObject {
                 
                 print(responseObject.result)
                 
-                SVProgressHUD.dismiss()
+                //SVProgressHUD.dismiss()
                 if responseObject.result.isSuccess {
                     let statusCode : Int = (responseObject.response?.statusCode)!
                     let resJson = responseObject.result.value as! NSDictionary
@@ -115,8 +115,9 @@ class BaseWebAccessLayer: NSObject {
         {
             // proceed
             
-            SVProgressHUD.setStatus("Logging.....")
-            
+            SVProgressHUD.show(withStatus: "Please Wait...")
+
+
             var finalStrUrl = String()
             
             finalStrUrl = Constants.baseUrl + strURL

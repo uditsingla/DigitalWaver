@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ReachabilitySwift
 
 class WaverManager: NSObject {
     
@@ -23,7 +24,7 @@ class WaverManager: NSObject {
 
     func addWaver(userInfo: [String : Any], handler : @escaping (Bool , String) -> Void)
     {
-        BaseWebAccessLayer.requestURLWithDictionaryResponse(requestType: .post, strURL: "quickwaiversync", headers: true, params: userInfo, result:
+        BaseWebAccessLayer.requestURLWithDictionaryResponse(requestType: .post, strURL: "quickwaiver", headers: true, params: userInfo, result:
             {
                 (jsonDict,statusCode) in
                 
@@ -34,12 +35,6 @@ class WaverManager: NSObject {
                     
                     if(isSuccess)
                     {
-                        var dictData = [String : Any]()
-                        let arrMut : NSMutableArray = NSMutableArray()
-                        dictData["data"] = arrMut
-                        UserDefaults.standard.set(dictData, forKey: "dictWaversData")
-                        UserDefaults.standard.synchronize()
-                        
                         handler(true ,"Waiver Created Successfully")
                     }
                     else
@@ -198,16 +193,16 @@ class WaverManager: NSObject {
     {
         BaseWebAccessLayer.requestURLWithArrayResponse(requestType: .post, strURL: "getwaiverdetails", headers: true, params: nil) { (arrResponse, statusCode) in
             // success code
-            debugPrint(arrResponse)
+            //debugPrint(arrResponse)
             if(statusCode == 200)
             {
                 if(arrResponse.count > 0)
                 {
                 let dictData = arrResponse.object(at: 0) as! [String : AnyObject]
-                print(dictData)
+                //print(dictData)
                     
                 //Set Waver Content
-                    ModelManager.sharedInstance.waverManager.waverHTMLContent = dictData["Content"] as? String
+                ModelManager.sharedInstance.waverManager.waverHTMLContent = dictData["Content"] as? String
                     
                 let userDefault = UserDefaults.standard
                 userDefault.set(dictData["BusinessName"], forKey: "buisnessName")
@@ -257,7 +252,7 @@ class WaverManager: NSObject {
 
     // MARK: Coredata Methods
 
-    func SaveGroupDataInDB (groupData:NSDictionary) {
+    func SaveGroupDataInDB (groupData:NSDictionary) -> Bool {
         let predicate = NSPredicate(format: "groupname==%@", groupData.value(forKey: "group_name") as! CVarArg)
         
         
@@ -286,6 +281,12 @@ class WaverManager: NSObject {
         }
     
         self.groupModelEntity = groupModelEntity1
+            
+            return true
+        }
+        else
+        {
+            return false
         }
     }
     
@@ -542,6 +543,116 @@ class WaverManager: NSObject {
         return nil
     }
     
+    
+    func setDataToBesynchronise(handler : @escaping (Bool , String) -> Void) {
+        
+        var dictData = [String : Any]()
+        var groupInfo = [String : Any]()
+        
+        var arrGroupInfo = [[String : Any]]()
+        
+        //Get Offline saved Data From DB
+        if let arrayGroups = ModelManager.sharedInstance.waverManager.getAllGroups()
+        {
+            print(arrayGroups)
+            if(arrayGroups.count > 0)
+            {
+                for groupObj in arrayGroups
+                {
+                    let group = groupObj as! GroupI
+                    
+                    var dictGroupInfo = [String : Any]()
+                    dictGroupInfo["businessname"] = group.businessname
+                    dictGroupInfo["link"] = group.link
+                    dictGroupInfo["participants_no"] = group.participantNo
+                    dictGroupInfo["group_name"] = group.groupName
+                    dictGroupInfo["isNewGroup"] = group.isNewGroup
+                    
+                    print(dictGroupInfo)
+                    
+                    if let arrParticpants =  ModelManager.sharedInstance.waverManager.getallOfflineparticipants(groupName: group.groupName!)
+                    {
+                        if(arrParticpants.count > 0)
+                        {
+                            var arrGroupParicipants = [[String : Any]]()
+                            
+                            for participantObj in arrParticpants
+                            {
+                                let participant = participantObj as! WaverI
+                                //For loop as of No. particiapnts in a group
+                                var dictParticipantsInfo = [String : Any]()
+                                dictParticipantsInfo["newsletter"] = participant.isNewsletterSubscribe
+                                dictParticipantsInfo["age"] = participant.age
+                                dictParticipantsInfo["gender"] = participant.gender
+                                dictParticipantsInfo["businessname"] = group.businessname
+                                dictParticipantsInfo["mimetype"] = "image/jpeg"
+                                dictParticipantsInfo["groupname"] = group.groupName
+                                dictParticipantsInfo["name"] = participant.name
+                                dictParticipantsInfo["email"] = participant.email
+                                dictParticipantsInfo["phoneno"] = participant.phoneNo
+                                dictParticipantsInfo["filecontent"] = participant.signaturefileContent
+                                dictParticipantsInfo["filename"] = "signature.jpg"
+                                arrGroupParicipants.append(dictParticipantsInfo)
+                                
+                                print(dictParticipantsInfo)
+                            }
+                            dictGroupInfo["GroupParticipantsInfo"] = arrGroupParicipants
+                        }
+                    }
+                    arrGroupInfo.append(dictGroupInfo)
+                }
+            }
+            
+        }
+        
+        if(arrGroupInfo.count == 0)
+        {
+            handler(true, "Data already synched")
+            return
+        }
+        
+        groupInfo["groupInfo"] = arrGroupInfo
+        dictData["data"] = groupInfo
+        
+        print(dictData)
+        
+        if(isNetAvailable())
+        {
+          ModelManager.sharedInstance.waverManager.synchDataOnServer(synchData: dictData) { (isSuccess, strMsg) in
+                
+                //SVProgressHUD.dismiss()
+                
+                if(isSuccess)
+                {
+                    arrGroupInfo.removeAll()
+                    ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
+                    handler(true, "Data has been synched successfully")
+                    
+                }
+                else
+                {
+                    handler(false, "\(strMsg)")
+                }
+            }
+        }
+        else
+        {
+            handler(false, "Please connect with internet")
+        }
+    }
+    
+    // MARK: - Internet Available
+    func isNetAvailable() -> Bool {
+        let reach = Reachability()
+        if let reachable : String = reach?.currentReachabilityString
+        {
+            if(reachable != "No Connection")
+            {
+                return true
+            }
+        }
+        return false
+    }
     
     
     

@@ -99,8 +99,6 @@ class WaverVC: UIViewController,UITextFieldDelegate {
     
     func saveDataInLocalDB()
     {
-        let dictWaiver = (UserDefaults.standard.object(forKey: "dictWaversData") as! [String : Any])
-        
         var dictData = [String : Any]()
         dictData["businessname"] = UserDefaults.standard.string(forKey: "buisnessName")
         dictData["participants_no"] = "\(particiantNo)"
@@ -119,19 +117,13 @@ class WaverVC: UIViewController,UITextFieldDelegate {
             }
         }
         
-        let arrMutable : NSArray = dictWaiver["data"] as! NSArray
+        if(!ModelManager.sharedInstance.waverManager.SaveGroupDataInDB(groupData: dictData as NSDictionary))
+        {
+            SVProgressHUD.showError(withStatus: "Groupname already exists")
+            SVProgressHUD.dismiss(withDelay: Constants.errorPopupTime)
 
-        let ary_mutable = NSMutableArray()
-        ary_mutable.addObjects(from: arrMutable as [AnyObject])
-        ary_mutable.add(dictData)
-        
-        
-        let dict : [String : Any] = ["data": ary_mutable]
-        
-        UserDefaults.standard.set(dict, forKey: "dictWaversData")
-        UserDefaults.standard.synchronize()
-        
-        ModelManager.sharedInstance.waverManager.SaveGroupDataInDB(groupData: dictData as NSDictionary)
+            return
+        }
 
         //APiHit
         let reach = Reachability()
@@ -139,7 +131,7 @@ class WaverVC: UIViewController,UITextFieldDelegate {
         {
             if(reachable != "No Connection")
             {
-                self.addParticiant(dictData: dict,savedData: dictData as NSDictionary)
+                self.addParticiant(dictData: dictData,savedData: dictData as NSDictionary)
             }
             else
             {

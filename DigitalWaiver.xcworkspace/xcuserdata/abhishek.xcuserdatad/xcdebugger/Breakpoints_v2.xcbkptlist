@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.464527"
+            timestampString = "534272720.81885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "642"
-            endingLineNumber = "642"
+            startingLineNumber = "645"
+            endingLineNumber = "645"
             landmarkName = "saveDataInLocalDB(dictData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Model/WaverManager.swift"
-            timestampString = "534192353.464746"
+            timestampString = "534272720.818976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "SaveGroupDataInDB(groupData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.464893"
+            timestampString = "534272720.819107"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "575"
-            endingLineNumber = "575"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
             landmarkName = "saveExistingGroupinDB()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.465032"
+            timestampString = "534272720.819205"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "207"
@@ -74,27 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.465161"
+            timestampString = "534272720.819297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "595"
-            endingLineNumber = "595"
-            landmarkName = "saveExistingGroupinDB()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.465283"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "559"
-            endingLineNumber = "559"
+            startingLineNumber = "565"
+            endingLineNumber = "565"
             landmarkName = "getWaiverDetail()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.465409"
+            timestampString = "534272720.819389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "591"
-            endingLineNumber = "591"
+            startingLineNumber = "597"
+            endingLineNumber = "597"
             landmarkName = "saveExistingGroupinDB()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Model/WaverManager.swift"
-            timestampString = "534192353.465531"
+            timestampString = "534272720.819485"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "SaveGroupDataInDB(groupData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Model/WaverManager.swift"
-            timestampString = "534192353.465654"
+            timestampString = "534272720.819594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "SaveGroupDataInDB(groupData:)"
             landmarkType = "7">
             <Locations>
@@ -150,31 +134,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DigitalWaiver.WaverManager.SaveGroupDataInDB(groupData: __ObjC.NSDictionary) -&gt; ()"
+                  symbolName = "DigitalWaiver.WaverManager.SaveGroupDataInDB(groupData: __ObjC.NSDictionary) -&gt; Swift.Bool"
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Model/WaverManager.swift"
-                  timestampString = "534192353.760175"
+                  timestampString = "534272255.412804"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "269"
-                  endingLineNumber = "269"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
                   offsetFromSymbolStart = "1257">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DigitalWaiver.WaverManager.SaveGroupDataInDB(groupData: __ObjC.NSDictionary) -&gt; ()"
+                  symbolName = "DigitalWaiver.WaverManager.SaveGroupDataInDB(groupData: __ObjC.NSDictionary) -&gt; Swift.Bool"
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Model/WaverManager.swift"
-                  timestampString = "534192353.762329"
+                  timestampString = "534272255.41625"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "269"
-                  endingLineNumber = "269"
-                  offsetFromSymbolStart = "9315">
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "9415">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -186,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.465779"
+            timestampString = "534272720.819695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "435"
-            endingLineNumber = "435"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
             landmarkName = "actionViewSignature(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,59 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.465894"
+            timestampString = "534272720.819789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
-            landmarkName = "actionViewSignature(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DigitalWaiver.AddParticipant.actionViewSignature(__ObjC.UIButton) -&gt; ()"
-                  moduleName = "DigitalWaiver"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Controllers/AddParticipant.swift"
-                  timestampString = "534192353.772851"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "445"
-                  endingLineNumber = "445"
-                  offsetFromSymbolStart = "3956">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DigitalWaiver.AddParticipant.actionViewSignature(__ObjC.UIButton) -&gt; ()"
-                  moduleName = "DigitalWaiver"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Controllers/AddParticipant.swift"
-                  timestampString = "534192353.774906"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "445"
-                  endingLineNumber = "445"
-                  offsetFromSymbolStart = "6171">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.466007"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
+            startingLineNumber = "451"
+            endingLineNumber = "451"
             landmarkName = "actionViewSignature(_:)"
             landmarkType = "7">
             <Locations>
@@ -266,12 +202,12 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Controllers/AddParticipant.swift"
-                  timestampString = "534192353.780703"
+                  timestampString = "534272255.433891"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "442"
-                  endingLineNumber = "442"
-                  offsetFromSymbolStart = "3370">
+                  startingLineNumber = "451"
+                  endingLineNumber = "451"
+                  offsetFromSymbolStart = "4187">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -281,12 +217,12 @@
                   moduleName = "DigitalWaiver"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Controllers/AddParticipant.swift"
-                  timestampString = "534192353.782786"
+                  timestampString = "534272255.436885"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "442"
-                  endingLineNumber = "442"
-                  offsetFromSymbolStart = "6163">
+                  startingLineNumber = "451"
+                  endingLineNumber = "451"
+                  offsetFromSymbolStart = "6402">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -297,14 +233,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalWaiver/Controllers/SearchWaiverVC.swift"
-            timestampString = "534192353.466113"
+            filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
+            timestampString = "534272720.819884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "setDataToBesynchronise()"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "actionViewSignature(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DigitalWaiver.AddParticipant.actionViewSignature(__ObjC.UIButton) -&gt; ()"
+                  moduleName = "DigitalWaiver"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Controllers/AddParticipant.swift"
+                  timestampString = "534272255.443576"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
+                  offsetFromSymbolStart = "3601">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DigitalWaiver.AddParticipant.actionViewSignature(__ObjC.UIButton) -&gt; ()"
+                  moduleName = "DigitalWaiver"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abhishek/Desktop/DW/DigitalWaver/DigitalWaiver/Controllers/AddParticipant.swift"
+                  timestampString = "534272255.446164"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
+                  offsetFromSymbolStart = "6394">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -314,7 +282,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.466725"
+            timestampString = "534272720.819978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "130"
@@ -330,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Model/WaverManager.swift"
-            timestampString = "534192353.466834"
+            timestampString = "534272720.820076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
+            startingLineNumber = "371"
+            endingLineNumber = "371"
             landmarkName = "SaveParticipentDataInDB(participentData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,39 +314,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Model/WaverManager.swift"
-            timestampString = "534192353.467022"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
-            landmarkName = "SaveParticipentDataInDB(participentData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalWaiver/Controllers/WaverVC.swift"
-            timestampString = "534192353.467179"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "saveDataInLocalDB()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalWaiver/Model/WaverManager.swift"
-            timestampString = "534192353.467325"
+            timestampString = "534272720.820192"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "378"
@@ -393,12 +329,28 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalWaiver/Controllers/WaverVC.swift"
-            timestampString = "534192353.467478"
+            filePath = "DigitalWaiver/Model/WaverManager.swift"
+            timestampString = "534272720.820304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
+            landmarkName = "SaveParticipentDataInDB(participentData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/Controllers/WaverVC.swift"
+            timestampString = "534272720.820412"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "saveDataInLocalDB()"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,27 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/WaverVC.swift"
-            timestampString = "534192353.467611"
+            timestampString = "534272720.820514"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "saveDataInLocalDB()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalWaiver/Controllers/WaverVC.swift"
-            timestampString = "534192353.467745"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "saveDataInLocalDB()"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Model/WaverManager.swift"
-            timestampString = "534192353.467875"
+            timestampString = "534272720.820614"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
             landmarkName = "UpdateGroupDataInDB(groupDict:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -458,12 +394,172 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalWaiver/Controllers/AddParticipant.swift"
-            timestampString = "534192353.468"
+            timestampString = "534272720.820724"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
             endingLineNumber = "145"
             landmarkName = "saveSignature(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/BusinessAccessLayer/GroupsPresenter.swift"
+            timestampString = "534272720.820829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "getNewData(email:password:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/BusinessAccessLayer/GroupsPresenter.swift"
+            timestampString = "534272720.82093"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "getNewData(email:password:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/Model/WaverManager.swift"
+            timestampString = "534272720.821028"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "555"
+            endingLineNumber = "555"
+            landmarkName = "setDataToBesynchronise(handler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/Controllers/WaverVC.swift"
+            timestampString = "534272720.821122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "saveDataInLocalDB()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/Model/WaverManager.swift"
+            timestampString = "534272720.821213"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "SaveGroupDataInDB(groupData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/Model/WaverManager.swift"
+            timestampString = "534272720.821304"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "SaveGroupDataInDB(groupData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/Controllers/WaverVC.swift"
+            timestampString = "534272720.821393"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "saveDataInLocalDB()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/BusinessAccessLayer/GroupsPresenter.swift"
+            timestampString = "534272720.821482"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "getNewData(email:password:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/WebAccessLayer/BaseWebAccessLayer.swift"
+            timestampString = "534272720.821571"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "requestURLWithArrayResponse(requestType:strURL:headers:params:result:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalWaiver/WebAccessLayer/BaseWebAccessLayer.swift"
+            timestampString = "534272720.821662"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "requestURLWithDictionaryResponse(requestType:strURL:headers:params:result:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

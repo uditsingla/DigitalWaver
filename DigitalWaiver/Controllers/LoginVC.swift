@@ -38,7 +38,12 @@ class LoginVC: UIViewController {
             return
         }
         
+        
+        SVProgressHUD.showError(withStatus: "mssggggggggggg")
+
         DispatchQueue.main.async {
+            
+
             self.groupPresenter.attachView(self as GroupView)
             self.groupPresenter.getNewData(email: self.txtLogin.text!, password: self.txtPassword.text!)
 
