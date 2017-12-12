@@ -42,7 +42,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YuR-r1-pCZ">
                                 <rect key="frame" x="163" y="357" width="442" height="310"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="uditsingla@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8ix-Yp-bZm">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8ix-Yp-bZm">
                                         <rect key="frame" x="19" y="25" width="404" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="8ny-TH-AAR"/>
@@ -100,7 +100,7 @@
                                             <segue destination="JdO-2F-fzj" kind="show" id="bAI-dE-i6K"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tJ9-4w-jix">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tJ9-4w-jix">
                                         <rect key="frame" x="19" y="90" width="404" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Vdw-nP-guH"/>
@@ -965,6 +965,7 @@
                         <viewLayoutGuide key="safeArea" id="190-aK-XM5"/>
                     </view>
                     <connections>
+                        <outlet property="btnCross" destination="QmL-91-uQk" id="ZiI-pU-ekq"/>
                         <outlet property="btnGender" destination="NXI-t2-9mz" id="9NB-3A-umV"/>
                         <outlet property="btnSign" destination="B50-hB-aIO" id="89b-vl-PaP"/>
                         <outlet property="btnSignMinor" destination="aQN-Xb-h7w" id="iJu-r0-Px6"/>

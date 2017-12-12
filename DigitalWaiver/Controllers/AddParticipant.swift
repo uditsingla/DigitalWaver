@@ -15,6 +15,7 @@ import ReachabilitySwift
 
 class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource, UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,UIWebViewDelegate,YPSignatureDelegate {
 
+    @IBOutlet weak var btnCross: UIButton!
     fileprivate let participentPresenter = ParticipentPresenter()
 
     @IBOutlet weak var viewSuperImage: UIView!
@@ -185,6 +186,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        btnCross.setTitle("", for: .normal)
         signatureView.delegate = self
 
         signatureView.layer.borderColor = UIColor.gray.cgColor
@@ -257,6 +259,9 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             let request = URLRequest(url: url)
             viewWebView.loadRequest(request)
         }
+        
+        btnCross.setTitle("", for: .normal)
+
         viewWebView.stopLoading()
     }
     
@@ -437,7 +442,7 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
             print(indexPath)
             
             
-            let urlStr = "\(Constants.baseUrl)getsignature?signature_url=\(((arrParticipants.object(at: indexPath) as? WaverI)?.signature)!)&mimetype=\(((arrParticipants.object(at: indexPath) as? WaverI)?.mimeType)!)"
+            let urlStr : String = "\(Constants.baseUrl)getsignature?signature_url=\(((arrParticipants.object(at: indexPath) as? WaverI)?.signature)!)&mimetype=\(((arrParticipants.object(at: indexPath) as? WaverI)?.mimeType)!)"
             
             print(urlStr)
             
@@ -454,13 +459,33 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
                 }
             }
             
-            viewWeb.isHidden = false
+            btnCross.setTitle("X", for: .normal)
 
+            viewWeb.isHidden = false
+            
             if let url = URL(string: urlStr) {
                 let request = URLRequest(url: url)
                 viewWebView.loadRequest(request)
             }
+
+            /*
+            let original = urlStr as String
             
+            let trimmedString = original.trimmingCharacters(in: .whitespaces)
+            
+//            original.trimmingCharacters(in: <#T##CharacterSet#>)
+//            let urlNew:String = original.trim().replacingOccurrences(of: " ", with: "%20")
+
+            
+            if let encodedString = trimmedString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+            {
+                let url1 = NSURL(string: encodedString)
+                print(url1!)
+                
+                let request = URLRequest(url: url1! as URL)
+                viewWebView.loadRequest(request)
+            }
+           */
         }
         
         webViewHeightContraints.constant = 0
@@ -557,8 +582,11 @@ class AddParticipant: UIViewController,UITableViewDelegate,UITableViewDataSource
                 self.strGroupName = (dictWaiverInfo["groupname"] as? String)!
                 self.particiantNoChanged = self.particiantNo
                 
+                
+                
                 //save data in local db
                 self.saveExistingGroupinDB()
+                
 
                 self.updateUI()
                 

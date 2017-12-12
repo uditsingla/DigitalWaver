@@ -96,9 +96,6 @@ class AuthManager: NSObject {
                 {
                     handler(nil, false,(jsonDict.value(forKey: "message") as? String)!)
                 }
-                
-              
-                
         })
     }
     

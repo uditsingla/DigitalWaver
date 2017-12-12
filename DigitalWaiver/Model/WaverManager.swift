@@ -607,7 +607,7 @@ class WaverManager: NSObject {
         
         if(arrGroupInfo.count == 0)
         {
-            handler(true, "Data already synched")
+            handler(true, "Data already Synced")
             return
         }
         
@@ -626,7 +626,7 @@ class WaverManager: NSObject {
                 {
                     arrGroupInfo.removeAll()
                     ModelManager.sharedInstance.waverManager.deleteAllDataFromDB()
-                    handler(true, "Data has been synched successfully")
+                    handler(true, "Data has been Synced Successfully")
                     
                 }
                 else

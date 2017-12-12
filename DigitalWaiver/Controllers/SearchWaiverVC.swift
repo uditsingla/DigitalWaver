@@ -148,7 +148,7 @@ class SearchWaiverVC: UIViewController {
     
     @IBAction func actionSynch(_ sender: Any) {
         
-        SVProgressHUD.show(withStatus: "Synching")
+        SVProgressHUD.show(withStatus: "Syncing")
         
         ModelManager.sharedInstance.waverManager.setDataToBesynchronise { (isSuccess, strMessage) in
         
