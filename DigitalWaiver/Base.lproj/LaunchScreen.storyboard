@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="exX-Av-9sP">
-                                <rect key="frame" x="128" y="256" width="512" height="512"/>
+                                <rect key="frame" x="159.5" y="434" width="449" height="156"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="512" id="Gh3-sd-c19"/>
-                                    <constraint firstAttribute="width" constant="512" id="I5w-9R-A7p"/>
+                                    <constraint firstAttribute="height" constant="156" id="Gh3-sd-c19"/>
+                                    <constraint firstAttribute="width" constant="449" id="I5w-9R-A7p"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch" width="256" height="256"/>
+        <image name="launch" width="224" height="78"/>
     </resources>
 </document>
